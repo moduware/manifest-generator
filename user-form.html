@@ -1,0 +1,52 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+<dom-module id="user-form">
+  <template>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+    </style>
+    <user-view data = [[obj]]></user-view>
+    <paper-input always-float-label label = "Tile Name" value = {{obj.name}}></paper-input>
+    <paper-input always-float-label label = "Tile ID" value = {{obj.id}}></paper-input>
+    <paper-input always-float-label label = "Description" value = {{obj.description}}></paper-input>
+    <paper-input always-float-label label = "Changes" value = {{obj.changes}}></paper-input>
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class UserForm extends Polymer.Element {
+
+      static get is() { return 'user-form' }
+      static get properties() {
+        return {
+          data: {
+            type: String,
+            notify: true 
+          }
+        }
+      }
+      constructor() {
+        super();
+        this.obj = {name: '', id: '', description: '', changes: '',};
+      }
+      
+      connectedCallback() {
+        super.connectedCallback();
+      }
+
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(UserForm.is, UserForm);
+
+  </script>
+</dom-module>

@@ -1,0 +1,50 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-view">
+  <template>
+    <style>
+
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <p>
+         "name" : [[data.name]],
+         "id" : [[data.id]],
+         "description" : [[data.description]],
+         "changes" : [[data.changes]],
+         
+     </p>
+
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class UserView extends Polymer.Element {
+
+      static get is() { return 'user-view' }
+      static get properties() {
+        return {
+          data: {
+            type: Object
+            
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+      }
+
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(UserView.is, UserView);
+
+  </script>
+</dom-module>
