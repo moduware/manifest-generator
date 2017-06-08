@@ -6,7 +6,9 @@
 <link rel="import" href="user-form.html">
 <link rel="import" href="user-view.html">
 <link rel="import" href="user-option.html">
+
 <dom-module id="manifest-wrapper">
+ 
   <template>
 
     <style>
@@ -15,12 +17,13 @@
         display: block;
         width: 100%;
         position: absolute;
+        top:3vw;
       }
       
     </style>
-    <user-option options={{option}}></user-option>
-    <user-form obj={{obj}} options={{option}}></user-form>
-    <user-view data={{obj}} options={{option}}></user-view>
+    <user-option selected="{{selected}}"></user-option>
+    <user-form obj="{{obj}}" selected="[[selected]]"></user-form>
+    <user-view data="[[obj]]"  selected="[[selected]]"></user-view>
    
   </template>
 
@@ -36,6 +39,7 @@
       
       connectedCallback() {
         super.connectedCallback();
+        console.log(this.options);
       }
 
     }

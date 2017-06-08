@@ -1,6 +1,7 @@
 
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
 
 <dom-module id="user-view">
   <template>
@@ -12,8 +13,8 @@
         margin-left: 5%;
         font-size: 14px;
         width: 50%;
-        top:15vw;
-        margin-top:13%;
+        top:2vw;
+        margin-top:14%;
         color: #606060;
 
       }
@@ -22,7 +23,7 @@
         font-weight: bold;
         margin: 0;
         text-align: center;
-        width: 100%
+        width: 100%;
       }
       .info {
         margin-top: 5%;
@@ -31,6 +32,15 @@
         word-wrap: break-word;    
         word-break: break-all;
       }
+      paper-button.indigo {
+        color: white;
+        background-color: #606060;
+        position: relative;
+        margin-top: 2vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
     </style>
 
@@ -38,14 +48,26 @@
         <h4> Manifest.json </h4>
         <span>{</span>
         <div class="info">
-          <div> "name" : "[[data.name]]", </div>
-          <div> "id" : "[[data.id]]", </div>
-          <div> "description" : "[[data.description]]",</div>
-          <div>"version" : "[[data.version]]",</div>
+          <div> "name":" [[data.name]] ", </div>
+          <div> "id":" [[data.id]] ", </div>
+          <div> "description":" [[data.description]] ",</div>
+          <div>"version":" [[data.version]] ",</div>
+          <template is="dom-if" if="{{!selected}}">
+            <div> "modules":"[[ data.modules]] ", </div>
+            <div> "title":" [[data.title]] ", </div>
+            <div> "color":" [[data.color]] ",</div>
+            <div>"text-color":" [[data.text-color]] "</div>
+          </template>
+          <template is="dom-if" if="{{selected}}">
+            <div> "size":" [[data.size]] ", </div>
+            <div> "icon":" [[data.icon]] ", </div>
+            <div> "creator":" [[data.creator]] ",</div>
+            <div>"default-tile":" [[data.default-tile]] "</div>
+          </template>
         </div>
         <span>}</span>
     </div>
-
+    <paper-button raised class="indigo" on-click="clickHandler">Download</paper-button>
   </template>
 
   <script>
@@ -64,6 +86,9 @@
 
       connectedCallback() {
         super.connectedCallback();
+      }
+      clickHandler() {
+        var data= JSON.stringify(this.data);
       }
 
     }

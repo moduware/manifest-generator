@@ -14,15 +14,27 @@
         width: 40%;
         padding-left: 3%;
         position: relative;
-        top:15vw;
-        margin-top:10%;
+        top:4vw;
+        margin-top:8%;
       }
 
     </style>
-    <paper-input always-float-label label="Name" value={{obj.name}}></paper-input>
-    <paper-input always-float-label label="ID" value={{obj.id}}></paper-input>
-    <paper-input always-float-label label="Description" value={{obj.description}}></paper-input>
-    <paper-input always-float-label label="Version" value={{obj.version}}></paper-input>
+    <paper-input always-float-label label="Name" value="{{obj.name}}"></paper-input>
+    <paper-input always-float-label label="ID" value="{{obj.id}}"></paper-input>
+    <paper-input always-float-label label="Description" value="{{obj.description}}"></paper-input>
+    <paper-input always-float-label label="Version" value="{{obj.version}}"></paper-input>
+    <template is="dom-if" if="{{!selected}}">
+      <paper-input always-float-label label="Modules" value="{{obj.modules}}"></paper-input>
+      <paper-input always-float-label label="Title" value="{{obj.title}}"></paper-input>
+      <paper-input always-float-label label="Color" value="{{obj.color}}"></paper-input>
+      <paper-input always-float-label label="Text Color" value="{{obj.text-color}}"></paper-input>
+    </template>
+    <template is="dom-if" if="{{selected}}">
+      <paper-input always-float-label label="Size" value="{{obj.size}}"></paper-input>
+      <paper-input always-float-label label="Icon" value="{{obj.icon}}"></paper-input>
+      <paper-input always-float-label label="Creator" value="{{obj.creator}}"></paper-input>
+      <paper-input always-float-label label="Default Tile" value="{{obj.default-tile}}"></paper-input>
+    </template>
   </template>
 
   <script>
@@ -33,35 +45,26 @@
       static get is() { return 'user-form' }
       static get properties() {
         return {
-          options: {
-            type: Array,
-            notify: true 
-          },
           obj: {
             type: Object,
-            notify:true
+            notify: true
+          },
+          selected: {
+            type: Number,
+            notify: true
           }
         }
       }
       constructor() {
         super();
-        console.log(this.options); 
+        this.obj={};
+            
         //Instead of creating obj in here, I want to crate it based on the bind options values and use dom-repeat for paper-input based on the items
-         
-        this.obj = {
-          name: '',
-          id:'',
-          description:'',
-          version:''
-        }
-        // for(var i = 0; i <this.options.length; i++  ) {
-        //   this.obj[this.options[i]] = '';
-        // }
       }
       connectedCallback() {
         super.connectedCallback();
       }
-
+      
     }
 
     // Register custom element definition using standard platform API
