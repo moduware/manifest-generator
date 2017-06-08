@@ -42,11 +42,20 @@
         justify-content: center;
       }
 
+      .resultOutput {
+        white-space: pre;
+      }
+
     </style>
 
     <div>
         <h4> Manifest.json </h4>
-        <span>{</span>
+
+        <div class="resultOutput">
+[[renderData(data)]]
+        </div>
+
+        <!--<span>{</span>
         <div class="info">
           <div> "name":" [[data.name]] ", </div>
           <div> "id":" [[data.id]] ", </div>
@@ -65,7 +74,7 @@
             <div>"default-tile":" [[data.default-tile]] "</div>
           </template>
         </div>
-        <span>}</span>
+        <span>}</span>-->
     </div>
     <paper-button raised class="indigo" on-click="clickHandler">Download</paper-button>
   </template>
@@ -79,14 +88,32 @@
       static get properties() {
         return {
           data: {
-            type: Object
-          }
+            type: Object,
+            value: function() {
+              return {
+                name: 'Laser', 
+                id: 'nexpaq.tile.laser',
+                description: null, 
+                version: null, 
+                modules: null, 
+                title: null, 
+                color: null, 
+                'text-color': null
+              }
+            }
+          },
         }
+      }
+
+      renderData(data) {
+        var json = JSON.stringify(data, null, 2);
+        return json;
       }
 
       connectedCallback() {
         super.connectedCallback();
       }
+
       clickHandler() {
         var data= JSON.stringify(this.data);
       }
