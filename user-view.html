@@ -7,18 +7,44 @@
     <style>
 
       :host {
-        display: block;
+        display: inline-block;
+        position: relative;
+        margin-left: 5%;
+        font-size: 14px;
+        width: 50%;
+        top:15vw;
+        margin-top:13%;
+        color: #606060;
+
+      }
+      h4 {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+        text-align: center;
+        width: 100%
+      }
+      .info {
+        margin-top: 5%;
+        line-height: 150%;
+        margin-left: 5%;
+        word-wrap: break-word;    
+        word-break: break-all;
       }
 
     </style>
 
-    <p>
-         "name" : [[data.name]],
-         "id" : [[data.id]],
-         "description" : [[data.description]],
-         "changes" : [[data.changes]],
-         
-     </p>
+    <div>
+        <h4> Manifest.json </h4>
+        <span>{</span>
+        <div class="info">
+          <div> "name" : "[[data.name]]", </div>
+          <div> "id" : "[[data.id]]", </div>
+          <div> "description" : "[[data.description]]",</div>
+          <div>"changes" : "[[data.changes]]",</div>
+        </div>
+        <span>}</span>
+    </div>
 
   </template>
 
@@ -32,7 +58,6 @@
         return {
           data: {
             type: Object
-            
           }
         }
       }

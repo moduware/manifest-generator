@@ -1,0 +1,65 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+
+<dom-module id="user-option">
+  <template>
+
+    <style>
+
+      :host {
+        display: block;
+        position:absolute;
+        width: 100%;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+        top:0;
+        color: #606060;
+        --paper-tab-ink: light-grey;
+      }
+    
+     
+    </style>
+    <paper-tabs id='hey' selected="0">
+      <paper-tab>TILE</paper-tab>
+      <paper-tab>MODULE</paper-tab>
+    </paper-tabs>
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class UserOption extends Polymer.Element {
+
+      static get is() { return 'user-option' }
+      static get properties() {
+        return {
+          options: {
+            type: Array,
+            notify: true 
+          }
+        }
+      }
+      constructor() {
+        super();
+
+        // if selected 0 {
+          this.options = ['name', 'id','description', 'version', 'modules', 'title', 'color', 'text-color' ]
+        // else
+        //  this.options = ['name', 'id','description', 'version', 'size', 'icon', 'creator', 'default-tile' ]
+        // }
+        
+      }
+      
+      connectedCallback() {
+        super.connectedCallback();
+      }
+
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(UserOption.is, UserOption);
+
+  </script>
+</dom-module>

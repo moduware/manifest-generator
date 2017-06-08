@@ -1,0 +1,47 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="user-form.html">
+<link rel="import" href="user-view.html">
+<link rel="import" href="user-option.html">
+<dom-module id="manifest-wrapper">
+  <template>
+
+    <style>
+
+      :host {
+        display: block;
+        width: 100%;
+        position: absolute;
+      }
+      
+    </style>
+    <user-option options={{option}}></user-option>
+    <user-form obj={{obj}} options={{option}}></user-form>
+    <user-view data={{obj}} options={{option}}></user-view>
+   
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class ManifestWrapper extends Polymer.Element {
+
+      static get is() { return 'manifest-wrapper' }
+      constructor() {
+        super();
+      }
+      
+      connectedCallback() {
+        super.connectedCallback();
+      }
+
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(ManifestWrapper.is, ManifestWrapper);
+
+  </script>
+</dom-module>

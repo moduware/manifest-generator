@@ -8,11 +8,40 @@
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="bower_components/paper-input/paper-input.html">
-  <link rel="import" href="user-form.html">
-  <link rel="import" href="user-view.html">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <link rel="import" href="manifest-wrapper.html">
+  <style>
+    .title {
+      display:block;
+      width: 100%;
+      position: fixed;
+      top : 0;
+      left:0;
+      height: 6%;
+      color: white;
+      background-color: #EE3696;
+      font-size: 22px;
+      text-align: center;
+      padding-top: 3%;
+      font-family: 'Roboto', sans-serif;
+
+    }
+    .wrapper {
+      position:absolute;
+      display: block;
+      top:8%;
+      width:100%;
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
 </head>
 
 <body>
-  <user-form><user-form>
+  <div>
+    <div class = "title" >Nexpaq Manifest Generator</div>
+    <div class= "wrapper">
+    <manifest-wrapper><manifest-wrapper>
+    </div>
+  </div>
 </body>
 </html>

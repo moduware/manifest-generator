@@ -10,14 +10,19 @@
 
       :host {
         display: block;
+        float:left;
+        width: 40%;
+        padding-left: 3%;
+        position: relative;
+        top:15vw;
+        margin-top:10%;
       }
 
     </style>
-    <user-view data = [[obj]]></user-view>
-    <paper-input always-float-label label = "Tile Name" value = {{obj.name}}></paper-input>
-    <paper-input always-float-label label = "Tile ID" value = {{obj.id}}></paper-input>
-    <paper-input always-float-label label = "Description" value = {{obj.description}}></paper-input>
-    <paper-input always-float-label label = "Changes" value = {{obj.changes}}></paper-input>
+    <paper-input always-float-label label="Name" value={{obj.name}}></paper-input>
+    <paper-input always-float-label label="ID" value={{obj.id}}></paper-input>
+    <paper-input always-float-label label="Description" value={{obj.description}}></paper-input>
+    <paper-input always-float-label label="Version" value={{obj.version}}></paper-input>
   </template>
 
   <script>
@@ -28,17 +33,31 @@
       static get is() { return 'user-form' }
       static get properties() {
         return {
-          data: {
-            type: String,
+          options: {
+            type: Array,
             notify: true 
+          },
+          obj: {
+            type: Object,
+            notify:true
           }
         }
       }
       constructor() {
         super();
-        this.obj = {name: '', id: '', description: '', changes: '',};
+        console.log(this.options); 
+        //Instead of creating obj in here, I want to crate it based on the bind options values and use dom-repeat for paper-input based on the items
+         
+        this.obj = {
+          name: '',
+          id:'',
+          description:'',
+          version:''
+        }
+        // for(var i = 0; i <this.options.length; i++  ) {
+        //   this.obj[this.options[i]] = '';
+        // }
       }
-      
       connectedCallback() {
         super.connectedCallback();
       }
