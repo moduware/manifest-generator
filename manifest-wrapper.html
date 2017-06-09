@@ -22,8 +22,8 @@
       
     </style>
     <user-option selected="{{selected}}"></user-option>
-    <user-form data="{{obj}}" selected="[[selected]]"></user-form>
-    <user-view data="[[obj]]" selected="[[selected]]"></user-view>
+    <user-form data="{{formData}}" selected="[[selected]]"></user-form>
+    <user-view data="[[formDataProxy(formData.*)]]" selected="[[selected]]"></user-view>
    
   </template>
 
@@ -33,6 +33,25 @@
     class ManifestWrapper extends Polymer.Element {
 
       static get is() { return 'manifest-wrapper' }
+      
+      static get properties() {
+        return {
+          formData: {
+            type: Object,
+            observer: 'formDataObserver',
+            value: function() {
+              return {};
+            }
+          }
+        }
+      }
+      
+      static get observers() {
+        return [
+          'formDataObserver(formData.*)'
+        ]
+      }
+
       constructor() {
         super();
       }
@@ -40,6 +59,14 @@
       connectedCallback() {
         super.connectedCallback();
         console.log(this.options);
+      }
+
+      formDataObserver(data) {
+        console.log(data);
+      }
+
+      formDataProxy(dataKey) {
+        return this.formData;
       }
 
     }

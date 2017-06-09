@@ -19,21 +19,21 @@
       }
 
     </style>
-    <paper-input always-float-label label="Name" value="{{data.name}}"></paper-input>
-    <paper-input always-float-label label="ID" value="{{data.id}}"></paper-input>
-    <paper-input always-float-label label="Description" value="{{data.description}}"></paper-input>
-    <paper-input always-float-label label="Version" value="{{data.version}}"></paper-input>
+    <paper-input always-float-label label="Name" value="{{data.name::input}}"></paper-input>
+    <paper-input always-float-label label="ID" value="{{data.id::input}}"></paper-input>
+    <paper-input always-float-label label="Description" value="{{data.description::change}}"></paper-input>
+    <paper-input always-float-label label="Version" value="{{data.version::change}}"></paper-input>
     <template is="dom-if" if="{{!selected}}">
-      <paper-input always-float-label label="Modules" value="{{data.modules}}"></paper-input>
-      <paper-input always-float-label label="Title" value="{{data.title}}"></paper-input>
-      <paper-input always-float-label label="Color" value="{{data.color}}"></paper-input>
-      <paper-input always-float-label label="Text Color" value="{{data.text-color}}"></paper-input>
+      <paper-input always-float-label label="Modules" value="{{data.modules::change}}"></paper-input>
+      <paper-input always-float-label label="Title" value="{{data.title::change}}"></paper-input>
+      <paper-input always-float-label label="Color" value="{{data.color::change}}"></paper-input>
+      <paper-input always-float-label label="Text Color" value="{{data.textColor::change}}"></paper-input>
     </template>
     <template is="dom-if" if="{{selected}}">
-      <paper-input always-float-label label="Size" value="{{data.size}}"></paper-input>
-      <paper-input always-float-label label="Icon" value="{{data.icon}}"></paper-input>
-      <paper-input always-float-label label="Creator" value="{{data.creator}}"></paper-input>
-      <paper-input always-float-label label="Default Tile" value="{{data.default-tile}}"></paper-input>
+      <paper-input always-float-label label="Size" value="{{data.size::change}}"></paper-input>
+      <paper-input always-float-label label="Icon" value="{{data.icon::change}}"></paper-input>
+      <paper-input always-float-label label="Creator" value="{{data.creator::change}}"></paper-input>
+      <paper-input always-float-label label="Default Tile" value="{{data.defaultTile::change}}"></paper-input>
     </template>
   </template>
 
@@ -48,7 +48,12 @@
         return {
           data: {
             type: Object,
-            notify: true
+            notify: true,
+            value: function() {
+              return {
+                name: 'laser'
+              };
+            }
           },
           selected: {
             type: Number,
@@ -59,14 +64,13 @@
 
       static get observers() {
         return [
-          'dataObserver(data.*)'
+          //'dataObserver(data.*)'
         ]
       }
 
       constructor() {
         super();
-        this.data={ name: 'laser'};
-            
+         
         //Instead of creating obj in here, I want to crate it based on the bind options values and use dom-repeat for paper-input based on the items
       }
 
@@ -74,9 +78,10 @@
         super.connectedCallback();
       }
 
-      dataObserver(data) {
-        this.notifyPath('data');
-      }
+      // dataObserver(data) {
+      //   this.notifyPath('data.name');
+      //   console.log('something changed!');
+      // }
     }
 
     // Register custom element definition using standard platform API

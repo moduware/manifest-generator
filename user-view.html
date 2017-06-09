@@ -52,7 +52,7 @@
         <h4> Manifest.json </h4>
 
         <div class="resultOutput">
-[[renderData(data)]]
+[[renderData(data.*)]]
         </div>
 
         <!--<span>{</span>
@@ -105,8 +105,18 @@
         }
       }
 
+      static get observers() {
+        return [
+          'formDataObserver(data.*)'
+        ]
+      }
+
+      formDataObserver(data) {
+        console.log(data);
+      }
+
       renderData(data) {
-        var json = JSON.stringify(data, null, 2);
+        var json = JSON.stringify(this.data, null, 2);
         return json;
       }
 
