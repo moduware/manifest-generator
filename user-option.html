@@ -20,7 +20,7 @@
     
      
     </style>
-    <paper-tabs id='options' selected="0">
+    <paper-tabs id='options' selected="{{selected}}">
       <paper-tab>TILE</paper-tab>
       <paper-tab>MODULE</paper-tab>
     </paper-tabs>
@@ -36,13 +36,13 @@
         return {
           selected: {
             type: Number,
-            notify: true
+            notify: true,
+            value: 0
           }
         }
       }
       constructor() {
         super();
-        this.selected=1;
       }
       
       connectedCallback() {
