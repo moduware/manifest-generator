@@ -54,26 +54,6 @@
         <div class="resultOutput">
 [[renderData(data.*)]]
         </div>
-        <!--<span>{</span>
-        <div class="info">
-          <div> "name":" [[data.name]] ", </div>
-          <div> "id":" [[data.id]] ", </div>
-          <div> "description":" [[data.description]] ",</div>
-          <div>"version":" [[data.version]] ",</div>
-          <template is="dom-if" if="{{!selected}}">
-            <div> "modules":"[[ data.modules]] ", </div>
-            <div> "title":" [[data.title]] ", </div>
-            <div> "color":" [[data.color]] ",</div>
-            <div>"text-color":" [[data.text-color]] "</div>
-          </template>
-          <template is="dom-if" if="{{selected}}">
-            <div> "size":" [[data.size]] ", </div>
-            <div> "icon":" [[data.icon]] ", </div>
-            <div> "creator":" [[data.creator]] ",</div>
-            <div>"default-tile":" [[data.default-tile]] "</div>
-          </template>
-        </div>
-        <span>}</span>-->
     </div>
     <paper-button raised class="indigo" on-click="clickHandler">Download</paper-button>
   </template>
@@ -84,34 +64,16 @@
     class UserView extends Polymer.Element {
 
       static get is() { return 'user-view' }
+
       static get properties() {
         return {
           data: {
             type: Object,
             value: function() {
-              return {
-                name: 'Laser', 
-                id: 'nexpaq.tile.laser',
-                description: null, 
-                version: null, 
-                modules: null, 
-                title: null, 
-                color: null, 
-                'text-color': null
-              }
+              return {};
             }
-          },
+          }
         }
-      }
-
-      static get observers() {
-        return [
-          'formDataObserver(data.*)'
-        ]
-      }
-
-      formDataObserver(data) {
-        console.log(data);
       }
 
       renderData(data) {
