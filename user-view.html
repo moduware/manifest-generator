@@ -55,7 +55,7 @@
 [[renderData(data.*)]]
         </div>
     </div>
-    <paper-button raised class="indigo" on-click="clickHandler">Download</paper-button>
+    <paper-button raised class="indigo" id="download">Download</paper-button>
   </template>
 
   <script>
@@ -72,19 +72,41 @@
             value: function() {
               return {};
             }
+          },
+          selected: {
+            type: Number,
+            notify: true
           }
         }
       }
 
       renderData(data) {
+        //Converts modules string to an Array
+        if (this.data.modules !== undefined && !Array.isArray(this.data.modules)) {
+          this.data.modules = this.data.modules.split(",");
+        }
+        //Stringifies the data
         var json = JSON.stringify(this.data, null, "\t");
         return json;
+      }
+      
+      ready() {
+        super.ready();
+        this.$.download.addEventListener('click',  e => {this.clickHandler(this.data)});
       }
 
       connectedCallback() {
         super.connectedCallback();
       }
 
+      clickHandler(data) {
+        var data = JSON.stringify(data, null, "\t");
+        var a = document.createElement('a');
+        var blob = new Blob([data], {'type':'application/octet-stream'});
+        a.href = window.URL.createObjectURL(blob);
+        a.download = 'manifest.json';
+        a.click();
+      }
     }
 
     // Register custom element definition using standard platform API
