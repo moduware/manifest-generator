@@ -16,8 +16,8 @@
         top:2vw;
         margin-top:14%;
         color: #606060;
-
       }
+
       h4 {
         font-size: 18px;
         font-weight: bold;
@@ -25,13 +25,7 @@
         text-align: center;
         width: 100%;
       }
-      .info {
-        margin-top: 5%;
-        line-height: 150%;
-        margin-left: 5%;
-        word-wrap: break-word;    
-        word-break: break-all;
-      }
+
       paper-button.indigo {
         color: white;
         background-color: #606060;
@@ -44,6 +38,11 @@
 
       .resultOutput {
         white-space: pre;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*word-wrap: break-word;        
+        overflow-wrap: break-word;    
+        width: 100%;*/
       }
 
     </style>
@@ -89,7 +88,7 @@
         var json = JSON.stringify(this.data, null, "\t");
         return json;
       }
-      
+
       ready() {
         super.ready();
         this.$.download.addEventListener('click',  e => {this.clickHandler(this.data)});
@@ -98,7 +97,7 @@
       connectedCallback() {
         super.connectedCallback();
       }
-
+      //Downloads manifest.json file
       clickHandler(data) {
         var data = JSON.stringify(data, null, "\t");
         var a = document.createElement('a');
