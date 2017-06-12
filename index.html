@@ -9,39 +9,38 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="bower_components/paper-input/paper-input.html">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <link rel="import" href="bower_components/app-layout/app-header/app-header.html">
   <link rel="import" href="manifest-wrapper.html">
   <style>
-    .title {
-      display:block;
-      width: 100%;
-      position: fixed;
-      top : 0;
-      left:0;
-      height: 6%;
+    app-header {
+      height: 30px;
+      background-color: #EE3696; 
       color: white;
-      background-color: #EE3696;
-      font-size: 22px;
       text-align: center;
-      padding-top: 3%;
       font-family: 'Roboto', sans-serif;
+      padding-top: 1%;
+      font-size: 18px;
 
     }
+    
     .wrapper {
-      position:absolute;
+      position: absolute;
       display: block;
-      top:8%;
-      width:100%;
+      top: 4%;
+      width: 100%;
       font-family: 'Roboto', sans-serif;
     }
   </style>
 </head>
 
 <body>
-  <div>
-    <div class = "title" >Nexpaq Manifest Generator</div>
-    <div class= "wrapper">
+  <app-header condenses>
+    <app-toolbar>
+      <div main-title>Nexpaq Manifest Generator</div>
+    </app-toolbar>
+  </app-header>
+  <div class= "wrapper">
     <manifest-wrapper><manifest-wrapper>
-    </div>
   </div>
 </body>
 </html>
