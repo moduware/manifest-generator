@@ -21,7 +21,7 @@
       }
       
     </style>
-    <user-option selected="{{selected}}"></user-option>
+    <user-option data="{{formData}}" selected="{{selected}}"></user-option>
     <user-form data="{{formData}}" selected="[[selected]]"></user-form>
     <user-view data="[[formData]]" selected="[[selected]]"></user-view>
    
@@ -33,10 +33,6 @@
     class ManifestWrapper extends Polymer.Element {
 
       static get is() { return 'manifest-wrapper' }
-      
-      static get properties() {
-        return {}
-      }
 
       constructor() {
         super();

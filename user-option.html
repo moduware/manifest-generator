@@ -15,7 +15,10 @@
         margin-bottom: 4px;
         top:0;
         color: #606060;
-       /* --paper-tab-ink: light-grey;*/
+      }
+      paper-tabs {
+        --paper-tab-ink: light-grey;
+        --paper-tabs-selection-bar-color: #3367d6;
       }
     
      
@@ -32,15 +35,29 @@
     class UserOption extends Polymer.Element {
 
       static get is() { return 'user-option' }
+
       static get properties() {
         return {
           selected: {
             type: Number,
             notify: true,
             value: 0
+          },
+          data: {
+            type: Object,
+            notify: true,
+            value: function() {
+              return {};
+            }
           }
         }
       }
+      static get observers() {
+        return [
+          'selectedObserver(selected)'
+        ]
+      }
+
       constructor() {
         super();
       }
@@ -48,6 +65,11 @@
       connectedCallback() {
         super.connectedCallback();
       }
+
+      selectedObserver(data) {
+        this.data = {};
+      }
+
      
     }
 
