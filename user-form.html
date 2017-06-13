@@ -25,32 +25,32 @@
       
 
     </style>
-    <paper-input always-float-label id="id_1" label="Name" value="{{data.name}}"></paper-input>
-    <paper-input always-float-label id="id_2" label="ID" value="{{data.id}}"></paper-input>
+    <paper-input always-float-label id="id_1" label="Name" value="{{data.name}}" allowed-pattern="[a-zA-Z]" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
+    <paper-input always-float-label id="id_2" label="ID" value="{{data.id}}"  allowed-pattern="[A-Za-z_.-]" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
     <paper-input always-float-label id="id_3" label="Description" value="{{data.description}}"></paper-input>
     <paper-input always-float-label id="id_4" label="Version" value="{{data.version}}"></paper-input>
-    <paper-tooltip for="id_1" position="right" ">ex : Laser Pointer</paper-tooltip>
-    <paper-tooltip for="id_2" position="right">ex : nexpaq.tile.laser</paper-tooltip>
-    <paper-tooltip for="id_3" position="right">ex : Nexpaq Laser module interface</paper-tooltip>
-    <paper-tooltip for="id_4" position="right">ex : 1.0.0</paper-tooltip>
+    <paper-tooltip for="id_1" offset="0" position="top" ">ex : Laser Pointer</paper-tooltip>
+    <paper-tooltip for="id_2" position="top">ex : nexpaq.tile.laser</paper-tooltip>
+    <paper-tooltip for="id_3" position="top">ex : Nexpaq Laser module interface</paper-tooltip>
+    <paper-tooltip for="id_4" position="top">ex : 1.0.0</paper-tooltip>
     <template is="dom-if" if="{{!selected}}">
-      <paper-input always-float-label id="id_5" label="Modules" value="{{data.modules}}"></paper-input>
+      <paper-input always-float-label id="id_5" label="Modules" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
       <paper-input always-float-label id="id_6" label="Title" value="{{data.title}}"></paper-input>
       <paper-input always-float-label id="id_7" label="Color" value="{{data.color}}"></paper-input>
       <paper-input always-float-label id="id_8" label="Text Color" value="{{data.text-color}}"></paper-input>
-      <paper-tooltip for="id_5" position="right" ">ex : nexpaq.tile.laser, nexpaq.tile.range</paper-tooltip>
-      <paper-tooltip for="id_6" position="right">ex : Laser</paper-tooltip>
-      <paper-tooltip for="id_7" position="right">ex : #606060</paper-tooltip>
-      <paper-tooltip for="id_8" position="right">ex : white</paper-tooltip>
+      <paper-tooltip for="id_5" position="top" ">ex : nexpaq.tile.laser, nexpaq.tile.range</paper-tooltip>
+      <paper-tooltip for="id_6" position="top">ex : Laser</paper-tooltip>
+      <paper-tooltip for="id_7" position="top">ex : #606060</paper-tooltip>
+      <paper-tooltip for="id_8" position="top">ex : white</paper-tooltip>
     </template>
     <template is="dom-if" if="{{selected}}">
-      <paper-input always-float-label id="id_9" label="Size" value="{{data.size}}"></paper-input>
+      <paper-input always-float-label id="id_9" label="Size" value="{{data.size}}" allowed-pattern="[0-9]"></paper-input>
       <paper-input always-float-label id="id_10" label="Orientation" value="{{data.orientation}}"></paper-input>
       <paper-input always-float-label id="id_11" label="Default Tile" value="{{data.default-tile}}"></paper-input>
-      <paper-tooltip for="id_2" position="right">ex : nexpaq.module.laser</paper-tooltip>
-      <paper-tooltip for="id_9" position="right" ">ex : 1</paper-tooltip>
-      <paper-tooltip for="id_10" position="right">ex : up</paper-tooltip>
-      <paper-tooltip for="id_11" position="right">ex : nexpaq.tile.laser</paper-tooltip>
+      <paper-tooltip for="id_2" position="top">ex : nexpaq.module.laser</paper-tooltip>
+      <paper-tooltip for="id_9" position="top" ">ex : 1</paper-tooltip>
+      <paper-tooltip for="id_10" position="top">ex : up</paper-tooltip>
+      <paper-tooltip for="id_11" position="top">ex : nexpaq.tile.laser</paper-tooltip>
     </template>
   </template>
 
