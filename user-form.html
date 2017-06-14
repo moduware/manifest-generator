@@ -3,6 +3,7 @@
 <link rel="import" href="bower_components/polymer/polymer-element.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
 <link rel="import" href="bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="bower_components/neon-animation/web-animations.html">
 
 <dom-module id="user-form">
   <template>
@@ -17,51 +18,54 @@
       }
       
       paper-tooltip {
-        --paper-tooltip-opacity: 0.7;
-        width:100px;
+        --paper-tooltip-opacity: 0.8;
+        --paper-tooltip-background: black ;
+        --paper-tooltip-text-color: white;
+        width: 120px;
+        font-size: 13px;
       }
       
 
     </style>
     <paper-input always-float-label id="name" label="Name" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
-    <paper-tooltip for="name" offset="0" position="top" ">ex : Laser Pointer</paper-tooltip>
+    <paper-tooltip for="name" offset="-7" position="bottom" ">ex : Laser Pointer</paper-tooltip>
 
     <paper-input always-float-label id="identify" label="ID" value="{{data.id}}"  allowed-pattern="[A-Za-z_\.\-0-9]" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
 
-    <paper-input always-float-label id="description" label="Description" value="{{data.description}}"></paper-input>
-    <paper-tooltip for="description" position="top">ex : Nexpaq Laser module interface</paper-tooltip>
+    <paper-input always-float-label id="description" label="Description" value="{{data.description}}" maxlength="150"></paper-input>
+    <paper-tooltip for="description" offset="-7" position="bottom">ex : Nexpaq Laser module interface</paper-tooltip>
 
-    <paper-input always-float-label id="version" label="Version" value="{{data.version}}" required auto-validate error-message="This field is required!" ></paper-input>
-    <paper-tooltip for="version" position="top">ex : 1.0.0</paper-tooltip>
+    <paper-input always-float-label id="version" label="Version" value="{{data.version}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20"></paper-input>
+    <paper-tooltip for="version" offset="-7" position="bottom">ex : 1.0.0</paper-tooltip>
     
     <template is="dom-if" if="{{!selected}}">
-      <paper-tooltip for="identify" position="top">ex : nexpaq.tile.laser</paper-tooltip>
+      <paper-tooltip for="identify" offset="-7" position="bottom" >ex : nexpaq.tile.laser</paper-tooltip>
 
-      <paper-input always-float-label id="modules" label="Modules" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
-      <paper-tooltip for="modules" position="top" ">ex : nexpaq.tile.laser, nexpaq.tile.range</paper-tooltip>
+      <paper-input always-float-label id="modules" label="Modules" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="150"></paper-input>
+      <paper-tooltip for="modules" offset="-7" position="bottom" ">ex : nexpaq.tile.laser, nexpaq.tile.range</paper-tooltip>
 
-      <paper-input always-float-label id="title" label="Title" value="{{data.title}}"></paper-input>
-      <paper-tooltip for="title" position="top">ex : Laser</paper-tooltip>
+      <paper-input always-float-label id="title" label="Title" value="{{data.title}}" maxlength="20"></paper-input>
+      <paper-tooltip for="title" offset="-7" position="bottom">ex : Laser</paper-tooltip>
 
-      <paper-input always-float-label id="color" label="Color" value="{{data.color}}"></paper-input>
-      <paper-tooltip for="color" position="top">ex : #606060</paper-tooltip>
+      <paper-input always-float-label id="color" label="Color" value="{{data.color}}" maxlength="20"></paper-input>
+      <paper-tooltip for="color" offset="-7" position="bottom">ex : #606060</paper-tooltip>
      
-      <paper-input always-float-label id="textColor" label="Text Color" value="{{data.text-color}}"></paper-input>
-      <paper-tooltip for="textColor" position="top">ex : white</paper-tooltip>
+      <paper-input always-float-label id="textColor" label="Text Color" value="{{data.text-color}}" maxlength="20"></paper-input>
+      <paper-tooltip for="textColor" offset="-7" position="bottom">ex : white</paper-tooltip>
     </template>
 
     <template is="dom-if" if="{{selected}}">
-      <paper-tooltip for="identify" position="top">ex : nexpaq.module.laser</paper-tooltip>
+      <paper-tooltip for="identify" offset="-7" position="bottom" >ex : nexpaq.module.laser </paper-tooltip>
 
-      <paper-input always-float-label id="size" label="Size" value="{{data.size}}" allowed-pattern="[0-9]" required auto-validate error-message="This field is required!"></paper-input>
-      <paper-tooltip for="size" position="top">ex : 1</paper-tooltip>
+      <paper-input always-float-label id="size" label="Size" value="{{data.size}}" allowed-pattern="[0-9]" required auto-validate error-message="This field is required!" maxlength="5"></paper-input>
+      <paper-tooltip for="size" offset="-7" position="bottom">ex : 1</paper-tooltip>
 
 
       <paper-input always-float-label id="orientation" label="Orientation" value="{{data.orientation}}"></paper-input>
-      <paper-tooltip for="orientation" position="top">ex : up</paper-tooltip>
+      <paper-tooltip for="orientation" offset="-7" position="bottom">ex : up</paper-tooltip>
       
-      <paper-input always-float-label id="defaultTile" label="Default Tile" value="{{data.default-tile}}"></paper-input>
-      <paper-tooltip for="defaultTile" position="top">ex : nexpaq.tile.laser</paper-tooltip>
+      <paper-input always-float-label id="defaultTile" label="Default Tile" value="{{data.default-tile}}" allowed-pattern="[A-Za-z_\.\-0-9]" maxlength="5"></paper-input>
+      <paper-tooltip for="defaultTile" offset="-7" position="bottom">ex : nexpaq.tile.laser</paper-tooltip>
     </template>
   
   </template>
