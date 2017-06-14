@@ -10,11 +10,7 @@
       :host {
         display: inline-block;
         position: relative;
-        margin-left: 5%;
         font-size: 14px;
-        width: 50%;
-        top:2vw;
-        margin-top:14%;
         color: #606060;
       }
 
@@ -38,17 +34,13 @@
 
       .resultOutput {
         white-space: pre;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        /*word-wrap: break-word;        
-        overflow-wrap: break-word;    
-        width: 100%;*/
+        overflow: scroll;
       }
 
     </style>
 
     <div>
-        <h4> Manifest.json </h4>
+        <h4> manifest.json </h4>
 
         <div class="resultOutput">
 [[renderData(data.*)]]
