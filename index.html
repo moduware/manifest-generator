@@ -12,23 +12,19 @@
   <link rel="import" href="bower_components/app-layout/app-header/app-header.html">
   <link rel="import" href="manifest-wrapper.html">
   <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
     app-header {
-      height: 30px;
+      height: 40px;
+      line-height: 40px;
+
       background-color: #EE3696; 
       color: white;
       text-align: center;
-      font-family: 'Roboto', sans-serif;
-      padding-top: 1%;
       font-size: 18px;
-
-    }
-    
-    .wrapper {
-      position: absolute;
-      display: block;
-      top: 4%;
-      width: 100%;
-      font-family: 'Roboto', sans-serif;
     }
   </style>
 </head>
@@ -39,8 +35,6 @@
       <div main-title>Nexpaq Manifest Generator</div>
     </app-toolbar>
   </app-header>
-  <div class= "wrapper">
-    <manifest-wrapper><manifest-wrapper>
-  </div>
+  <manifest-wrapper></manifest-wrapper>
 </body>
 </html>
