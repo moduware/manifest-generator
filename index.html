@@ -7,38 +7,18 @@
   <title>MANIFEST GENERATOR</title>
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="bower_components/paper-input/paper-input.html">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-  <link rel="import" href="bower_components/app-layout/app-header/app-header.html">
-  <link rel="import" href="manifest-wrapper.html">
+  <link rel="import" href="nexpaq-manifest-generator.html">
+
   <style>
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
     }
-
-    app-header {
-      height: 40px;
-      line-height: 40px;
-      background-color: #EE3696; 
-      color: white;
-      text-align: center;
-      font-size: 18px;
-    }
-
-    manifest-wrapper {
-      max-width: 980px;
-      margin: 0 auto;
-    }
   </style>
 </head>
 
 <body>
-  <app-header condenses>
-    <app-toolbar>
-      <div main-title>Nexpaq Manifest Generator</div>
-    </app-toolbar>
-  </app-header>
-  <manifest-wrapper></manifest-wrapper>
+  <nexpaq-manifest-generator></nexpaq-manifest-generator>
 </body>
 </html>

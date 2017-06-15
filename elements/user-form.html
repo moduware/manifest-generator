@@ -1,9 +1,8 @@
-
 <!-- Load the Polymer.Element base class -->
-<link rel="import" href="bower_components/polymer/polymer-element.html">
-<link rel="import" href="bower_components/paper-input/paper-input.html">
-<link rel="import" href="bower_components/paper-tooltip/paper-tooltip.html">
-<link rel="import" href="bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
 
 <dom-module id="user-form">
   <template>
@@ -28,7 +27,7 @@
 
     </style>
     <paper-input always-float-label id="name" label="Name" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
-    <paper-tooltip for="name" offset="-7" position="bottom" ">ex : Laser Pointer</paper-tooltip>
+    <paper-tooltip for="name" offset="-7" position="bottom">ex : Laser Pointer</paper-tooltip>
 
     <paper-input always-float-label id="identify" label="ID" value="{{data.id}}"  allowed-pattern="[A-Za-z_\.\-0-9]" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
 
@@ -42,7 +41,7 @@
       <paper-tooltip for="identify" offset="-7" position="bottom" >ex : nexpaq.tile.laser</paper-tooltip>
 
       <paper-input always-float-label id="modules" label="Modules" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="150"></paper-input>
-      <paper-tooltip for="modules" offset="-7" position="bottom" ">ex : nexpaq.tile.laser, nexpaq.tile.range</paper-tooltip>
+      <paper-tooltip for="modules" offset="-7" position="bottom">ex : nexpaq.tile.laser, nexpaq.tile.range</paper-tooltip>
 
       <paper-input always-float-label id="title" label="Title" value="{{data.title}}" maxlength="20"></paper-input>
       <paper-tooltip for="title" offset="-7" position="bottom">ex : Laser</paper-tooltip>

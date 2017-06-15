@@ -1,0 +1,101 @@
+<link rel="import" href="../vendor/polymer/polymer.html">
+<link rel="import" href="../behaviours/element-behaviour.html">
+
+<dom-module id="nexpaq-tile">
+  <template>
+  <style>
+    :host,
+    .container {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    }
+
+    .container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    padding: 22%;
+    }
+
+    .title {
+    position: absolute;
+    top: 4px; left: 8px;
+
+    font-size: 12px;
+    }
+
+    .icon {
+    /*width: 100%;*/
+    }
+
+
+  </style>
+  <div class="container" style$="background-color:{{backgroundColor}};color:{{textColor}};">
+    <div class="title">{{text}}</div>
+    <template is="dom-if" if="[[iconSrc]]">
+    <img class="icon" src$="{{iconSrc}}">
+    </template>
+  </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'nexpaq-tile',
+      behaviors: [ElementBehavior],
+      properties: {
+        /* Key parameter */
+        type: {
+          type: String,
+          reflectToAttribute: true,
+          value: null,
+        },
+
+        /* Appearance parameters */
+        text: {
+          type: String,
+          reflectToAttribute: true
+        },
+        backgroundColor: {
+          type: String,
+          reflectToAttribute: true
+        },
+        textColor: {
+          type: String,
+          reflectToAttribute: true
+        },
+        iconSrc: {
+          type: String,
+          reflectToAttribute: true,
+          value: null
+        }
+      },
+      listeners: {
+        down: "handleDown",
+        up: "handleUp"
+      },
+      ready: function() {
+        
+      },
+
+      _tapTimer: null,
+      handleDown: function(e) {
+        var tileObject = this;
+        this._tapTimer = setTimeout(function() {
+          console.log('longtap');
+          tileObject._tapTimer = null;
+          tileObject.fire('longtap', tileObject);
+        }, 5 * 100);
+      },
+
+      handleUp: function(e) {
+        if (this._tapTimer != null) {
+          clearTimeout(this._tapTimer);
+          console.log('fasttap');
+          this.fire('fasttap', this);
+        }
+      }
+
+    });
+  </script>
+</dom-module>
