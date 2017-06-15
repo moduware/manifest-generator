@@ -100,6 +100,20 @@
       connectedCallback() {
         super.connectedCallback();
       }
+
+      validateForm() {
+        var paperInputs = document.getElementsByTagName("paper-input");
+        for (var i=0; i<paperInputs.length; i++) {
+          if (!validateField(paperInputs[i])) {
+            return false;
+          }
+        }
+        return true;
+      }
+      
+      validateField(field) {
+        return (field.hasAttribute("required") && !field.invalid && field.value !== "")
+      }
     }
 
     // Register custom element definition using standard platform API
