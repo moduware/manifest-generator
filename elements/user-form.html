@@ -98,6 +98,11 @@
           }
         }
       }
+      static get observers() {
+        return [
+          'selectedObserver(selected)'
+        ]
+      }
 
        ready() {
         super.ready();
@@ -114,9 +119,15 @@
         super.connectedCallback();
       }
 
+      selectedObserver(selected) {
+        //var temp = Polymer.dom(this.root).querySelector("template");
+        // temp.iterator_.updateIteratedValue();
+      }
+
       validateForm() {
         console.log("validated");
         var paperInputs = Polymer.dom(this.root).querySelectorAll("paper-input");
+        console.log(paperInputs);
         for (var i=0; i<paperInputs.length; i++) {
           if (!this.validateField(paperInputs[i])) {
             this.valid = false;
@@ -138,6 +149,5 @@
 
     // Register custom element definition using standard platform API
     customElements.define(UserForm.is, UserForm);
-
   </script>
 </dom-module>
