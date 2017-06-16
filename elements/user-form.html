@@ -26,21 +26,21 @@
       
 
     </style>
-    <paper-input always-float-label id="name" label="Name" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
+    <paper-input always-float-label id="name" label="Name" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
     <paper-tooltip for="name" offset="-7" position="bottom">ex : Laser Pointer</paper-tooltip>
 
-    <paper-input always-float-label id="identify" label="ID" value="{{data.id}}"  allowed-pattern="[A-Za-z_\.\-0-9]" required auto-validate error-message="This field is required!" maxlength="50"></paper-input>
+    <paper-input always-float-label id="identify" label="ID" value="{{data.id}}"  allowed-pattern="[A-Za-z_\.\-0-9]" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
 
     <paper-input always-float-label id="description" label="Description" value="{{data.description}}" maxlength="150"></paper-input>
     <paper-tooltip for="description" offset="-7" position="bottom">ex : Nexpaq Laser module interface</paper-tooltip>
 
-    <paper-input always-float-label id="version" label="Version" value="{{data.version}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20"></paper-input>
+    <paper-input always-float-label id="version" label="Version" value="{{data.version}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20" on-change="validateForm"></paper-input>
     <paper-tooltip for="version" offset="-7" position="bottom">ex : 1.0.0</paper-tooltip>
     
     <template is="dom-if" if="{{!selected}}">
       <paper-tooltip for="identify" offset="-7" position="bottom" >ex : nexpaq.tile.laser</paper-tooltip>
 
-      <paper-input always-float-label id="modules" label="Modules" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="150"></paper-input>
+      <paper-input always-float-label id="modules" label="Modules" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="150" on-change="validateForm"></paper-input>
       <paper-tooltip for="modules" offset="-7" position="bottom">ex : nexpaq.tile.laser, nexpaq.tile.range</paper-tooltip>
 
       <paper-input always-float-label id="title" label="Title" value="{{data.title}}" maxlength="20"></paper-input>
@@ -56,7 +56,7 @@
     <template is="dom-if" if="{{selected}}">
       <paper-tooltip for="identify" offset="-7" position="bottom" >ex : nexpaq.module.laser </paper-tooltip>
 
-      <paper-input always-float-label id="size" label="Size" value="{{data.size}}" allowed-pattern="[0-9]" required auto-validate error-message="This field is required!" maxlength="5"></paper-input>
+      <paper-input always-float-label id="size" label="Size" value="{{data.size}}" allowed-pattern="[0-9]" required auto-validate error-message="This field is required!" maxlength="5" on-change="validateForm"></paper-input>
       <paper-tooltip for="size" offset="-7" position="bottom">ex : 1</paper-tooltip>
 
 
@@ -88,12 +88,26 @@
           selected: {
             type: Number,
             notify: true
+          },
+          valid: {
+            type: Boolean,
+            notify: true,
+            value: function() {
+              return false;
+            }
           }
         }
       }
 
-      constructor() {
-        super();
+       ready() {
+        super.ready();
+        // var paperInputs = Polymer.dom(this.root).querySelectorAll("paper-input");
+        // for (var i=0; i<paperInputs.length; i++) {
+        //   if (paperInputs[i].hasAttribute("required")) {
+        //     paperInputs[i].onchange = this.validateForm;
+        //     console.log(paperInputs[i]);
+        //   }
+        // }
       }
 
       connectedCallback() {
@@ -101,13 +115,16 @@
       }
 
       validateForm() {
+        console.log("validated");
         var paperInputs = Polymer.dom(this.root).querySelectorAll("paper-input");
         for (var i=0; i<paperInputs.length; i++) {
           if (!this.validateField(paperInputs[i])) {
-            return false;
+            this.valid = false;
+            return;
           }
         }
-        return true;
+        this.valid = true; 
+        return;
       }
       
       validateField(field) {

@@ -23,17 +23,7 @@
         text-align: center;
         width: 100%;
       }
-
-      paper-button.indigo {
-        color: white;
-        background-color: #606060;
-        position: relative;
-        margin-top: 2vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
+     
       .resultOutput {
         white-space: pre;
         overflow: scroll;
@@ -48,7 +38,6 @@
 [[renderData(data.*)]]
         </div>
     </div>
-    <paper-button raised class="indigo" id="download">Download</paper-button>
   </template>
 
   <script>
@@ -69,6 +58,10 @@
           selected: {
             type: Number,
             notify: true
+          },
+          json: {
+            type: String,
+            notify: true
           }
         }
       }
@@ -80,26 +73,16 @@
         }
         //Stringifies the data
         var json = JSON.stringify(this.data, null, "\t");
+        this.json = json;
         return json;
       }
 
       ready() {
         super.ready();
-        this.$.download.addEventListener('click',  e => {this.clickHandler(this.data)});
       }
 
       connectedCallback() {
         super.connectedCallback();
-      }
-      
-      //Downloads manifest.json file
-      clickHandler(data) {
-        var data = JSON.stringify(data, null, "\t");
-        var a = document.createElement('a');
-        var blob = new Blob([data], {'type':'application/octet-stream'});
-        a.href = window.URL.createObjectURL(blob);
-        a.download = 'manifest.json';
-        a.click();
       }
     }
 
