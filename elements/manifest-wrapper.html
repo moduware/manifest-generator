@@ -6,7 +6,7 @@
 <link rel="import" href="user-form.html">
 <link rel="import" href="user-view.html">
 <link rel="import" href="user-option.html">
-
+<link rel="import" href="user-action.html">
 <dom-module id="manifest-wrapper">
  
   <template>
@@ -20,9 +20,10 @@
       }
 
       user-form,
-      user-view {
+      user-view,
+      user-action {
         width: 47%;
-        min-width: 375px;
+        min-width: 320px;
         flex-grow: 1;
       }
 
@@ -33,11 +34,16 @@
       user-view {
         margin-left: auto;
       }
+      user-action {
+        max-width: 400px;
+        margin-left: auto;
+      }
 
     </style>
     <user-option data="{{formData}}" selected="{{selected}}"></user-option>
-    <user-form data="{{formData}}" selected="[[selected]]"></user-form>
-    <user-view data="[[formData]]" selected="[[selected]]"></user-view>
+    <user-form data="{{formData}}" selected="[[selected]]" valid="{{valid}}"></user-form>
+    <user-view data="[[formData]]" selected="[[selected]]" json="{{json}}"></user-view>
+    <user-action json="[[json]]" valid="[[valid]]"></user-action>
    
   </template>
 

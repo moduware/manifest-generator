@@ -1,0 +1,71 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="user-action">
+  <template>
+    <style>
+      paper-button.indigo {
+        color: white;
+        background-color: #606060;
+        position: relative;
+        margin-top: 2vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+
+      }
+
+    </style>
+
+    <paper-button raised class="indigo" id="download">Download</paper-button>
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class UserAction extends Polymer.Element {
+
+      static get is() { return 'user-action' }
+
+      static get properties() {
+        return {
+          valid: {
+            type: Boolean,
+            notify: true
+          },
+          json: {
+            type: String,
+            notify: true
+          }
+        }
+      }
+
+      ready() {
+        super.ready();
+        this.$.download.addEventListener('click',  e => {this.clickHandler(this.json)});
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+      }
+      
+      //Downloads manifest.json file
+      clickHandler(data) {
+        if(this.valid == true) {
+          var a = document.createElement('a');
+          var blob = new Blob([data], {'type':'application/octet-stream'});
+          a.href = window.URL.createObjectURL(blob);
+          a.download = 'manifest.json';
+          a.click();
+        }
+      }
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(UserAction.is, UserAction);
+
+  </script>
+</dom-module>
