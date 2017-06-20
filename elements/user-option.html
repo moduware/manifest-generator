@@ -47,6 +47,10 @@
             value: function() {
               return {};
             }
+          },
+          option: {
+            type: String,
+            notify: true
           }
         }
       }
@@ -65,10 +69,14 @@
       }
 
       selectedObserver(data) {
+        if (data == 0) {
+          this.option = "tile";
+        }
+        if (data == 1)  {
+          this.option = "module";
+        }
         this.data = {};
       }
-
-     
     }
 
     // Register custom element definition using standard platform API
