@@ -54,12 +54,39 @@
 
       static get is() { return 'manifest-wrapper' }
 
+      static get properties() {
+        return {
+          formData: Object,
+          option: String
+        }
+      }
+
+      static get observers() {
+        return [
+          'optionObserver(option)'
+        ]
+      }
+
       constructor() {
         super();
       }
       
       connectedCallback() {
         super.connectedCallback();
+      }
+
+      optionObserver(option) {
+        if (option == "tile") {
+          this.formData = {
+            color: "black",
+            "text-color": "white"
+          };
+        }
+        if (option == "module")  {
+          this.formData = {
+            size: 1
+          };
+        }
       }
 
       isEqual(a, b) {

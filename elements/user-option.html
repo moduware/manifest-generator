@@ -41,13 +41,6 @@
             notify: true,
             value: 0
           },
-          data: {
-            type: Object,
-            notify: true,
-            value: function() {
-              return {};
-            }
-          },
           option: {
             type: String,
             notify: true
@@ -68,14 +61,13 @@
         super.connectedCallback();
       }
 
-      selectedObserver(data) {
-        if (data == 0) {
+      selectedObserver(selected) {
+        if (selected == 0) {
           this.option = "tile";
         }
-        if (data == 1)  {
+        if (selected == 1)  {
           this.option = "module";
         }
-        this.data = {};
       }
     }
 
