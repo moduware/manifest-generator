@@ -125,6 +125,8 @@
       }
 
       fileHandler() {
+        var uploadedData;
+        var self = this;
         var file = this.$.input.files[0];
         if (file) {
           var reader = new FileReader();
@@ -132,13 +134,15 @@
           
           reader.onload = function (evt) {
             var target = evt.target.result;
-            var uploadedData = JSON.parse(target);
+            uploadedData = JSON.parse(target);
             console.log(uploadedData);
           }
-
-          // this.set("data.name",...);
-          // this.notifyPath("data.name");
-
+          setTimeout(function() {
+            console.log(uploadedData);
+            self.set("data", uploadedData);
+            self.notifyPath("data");
+          }, 500);
+         
           reader.onerror = function (evt) {
             alert("error reading file");
           }
