@@ -25,7 +25,7 @@
     </style>
     <paper-input always-float-label id="name" label="Name" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
     <paper-tooltip for="name" offset="-7" position="bottom">ex : Laser Pointer</paper-tooltip>
-     <input type="file" id="input">
+     
 
     <paper-input always-float-label id="id" label="ID" value="{{data.id}}"  allowed-pattern="[A-Za-z_\.\-0-9]" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
 
@@ -104,14 +104,27 @@
           },
           option: {
             type: String,
+            notify: true
+           
+          },
+          fields: {
+            type: Array,
             notify: true,
-            value: "tile"
+            value: function() {
+              return [];
+            }
           }
         }
       }
+
+      static get observers() {
+        return [
+          'selectedOptionObserver(option)'
+        ]
+      }
+
       ready() {
         super.ready();
-        this.$.input.addEventListener("change", e => {this.fileHandler()});
       }
 
 
@@ -120,50 +133,22 @@
       }
 
       selectedOptionObserver(option) {
-       console.log("selectedOption changed: " + option);
+        this.fields = [];
+        console.log("selectedOption changed: " + option);
+        //Dynamically creates the allowed fields based on the id in the current template
+        // var inputFields = Polymer.dom(this.root).querySelectorAll("paper-input");
+        // console.log(inputFields);
+        // for (var i=0; i< inputFields.length; i++) {
+        //   this.push("fields", inputFields[i].id);
+        // }
       // Polymer.dom(this.root).querySelector("template").iterator_.updateIteratedValue();
       }
 
-      fileHandler() {
-        var uploadedData;
-        var self = this;
-        var file = this.$.input.files[0];
-        var allowedFields = [];
-        var renderedData = {};
-        if (file) {
-          var reader = new FileReader();
-          reader.readAsText(file, "UTF-8");
-          
-          reader.onload = function (evt) {
-            var target = evt.target.result;
-            uploadedData = JSON.parse(target);
-            console.log(uploadedData);
-          }
-          setTimeout(function() {
-            //Dynamically creates the allowed fields baed on the current template
-            var inputFields = Polymer.dom(self.root).querySelectorAll("paper-input");
-            for (var i=0; i< inputFields.length; i++) {
-              allowedFields.push(inputFields[i].id);
-            }
-            for (var key in uploadedData) {
-              if (allowedFields.indexOf(key) !== -1) {
-                renderedData[key] = uploadedData[key]
-              }
-            }
-
-            self.set("data", renderedData);
-            self.notifyPath("data");
-          }, 500);
-         
-          reader.onerror = function (evt) {
-            alert("error reading file");
-          }
-        }
-      }
 
       validateForm() {
         console.log("validated");
         var paperInputs = Polymer.dom(this.root).querySelectorAll("paper-input");
+        console.log(paperInputs);
         for (var i=0; i<paperInputs.length; i++) {
           if (!this.validateField(paperInputs[i])) {
             this.valid = false;

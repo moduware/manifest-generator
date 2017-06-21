@@ -21,6 +21,7 @@
     </style>
 
     <paper-button raised class="indigo" id="download">Download</paper-button>
+    <input type="file" id="input">
   </template>
 
   <script>
@@ -35,9 +36,6 @@
           data: {
             type: Object,
             notify: true,
-            value: function() {
-              return {};
-            }
           },
           valid: {
             type: Boolean,
@@ -46,6 +44,14 @@
           json: {
             type: String,
             notify: true
+          },
+          option: {
+            type: String,
+            notify: true
+          },
+          fields: {
+            type: Array,
+            notify: true
           }
         }
       }
@@ -53,7 +59,10 @@
       ready() {
         super.ready();
         this.$.download.addEventListener('click',  e => {this.clickHandler(this.json)});
+        this.$.input.addEventListener("change", e => {this.fileHandler()});
       }
+
+
 
       connectedCallback() {
         super.connectedCallback();
@@ -69,8 +78,46 @@
           a.click();
         }
       }
-    }
 
+      fileHandler() {
+        var uploadedData;
+        var self = this;
+        var file = this.$.input.files[0];
+        var allowedFields = [];
+        var renderedData = {};
+        
+        if (this.option == "tile") {
+          allowedFields = ["name", "id","description", "version"];
+        } else {
+          allowedFields = ["name", "id","description", "firmwareVersion"];
+        }
+
+        if (file) {
+          var reader = new FileReader();
+          reader.readAsText(file, "UTF-8");
+          //Parses the data when it is loaded
+          reader.onload = function (evt) {
+            var target = evt.target.result;
+            uploadedData = JSON.parse(target);
+          }
+          //Waits for the 
+          setTimeout(function() {
+            //Creates object based in the
+            for (var key in uploadedData) {
+              if (allowedFields.indexOf(key) !== -1) {
+                renderedData[key] = uploadedData[key]
+              }
+            }
+            self.set("data", renderedData);
+            self.notifyPath("data");
+          }, 500);
+         
+          reader.onerror = function (evt) {
+            alert("error reading file");
+          }
+        }
+      }
+    }
     // Register custom element definition using standard platform API
     customElements.define(UserAction.is, UserAction);
 
