@@ -2,6 +2,7 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="nexpaq-tile.html">
 
 <dom-module id="user-view">
   <template>
@@ -29,6 +30,18 @@
         overflow: scroll;
       }
 
+      .tile-container {
+        position: relative;
+        margin: 0 auto;
+        width: 112px; height: 112px;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .tile-container nexpaq-tile {
+        z-index: -1;
+      }
+
     </style>
 
     <div>
@@ -36,6 +49,10 @@
 
         <div class="resultOutput">
 [[renderData(data.*)]]
+        </div>
+
+        <div class="tile-container">
+          <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.text-color]]"></nexpaq-tile>
         </div>
     </div>
   </template>
@@ -55,6 +72,7 @@
               return {};
             }
           },
+          renderTile: Boolean,
           json: {
             type: String,
             notify: true
