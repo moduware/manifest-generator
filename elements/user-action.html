@@ -15,13 +15,20 @@
         align-items: center;
         justify-content: center;
         font-size: 14px;
-
+      }           
+      input[type="file"]{
+        -webkit-appearance:none; 
+        position:absolute;
+        top:0; left:0;
+        opacity:0; 
       }
-
     </style>
 
-    <paper-button raised class="indigo" id="download">Download</paper-button>
-    <input type="file" id="input">
+    <paper-button raised class="indigo" id="download">DOWNLOAD</paper-button>
+     <paper-button raised class="indigo">
+        <span>UPLOAD</span>
+        <input name="Select File" type="file" id="input"/>
+    </paper-button>
   </template>
 
   <script>
@@ -87,9 +94,9 @@
         var renderedData = {};
         
         if (this.option == "tile") {
-          allowedFields = ["name", "id","description", "version"];
+          allowedFields = ["name", "id","description", "changes", "version", "minumumAppVersion", "modules", "title", "color", "textColor"];
         } else {
-          allowedFields = ["name", "id","description", "firmwareVersion"];
+          allowedFields = ["name", "id","description", "changes", "firmwareVersion", "size", "orientation", "defaultTile"];
         }
 
         if (file) {
