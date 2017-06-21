@@ -32,6 +32,13 @@
 
       static get properties() {
         return {
+          data: {
+            type: Object,
+            notify: true,
+            value: function() {
+              return {};
+            }
+          },
           valid: {
             type: Boolean,
             notify: true
