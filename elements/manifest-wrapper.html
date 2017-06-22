@@ -41,9 +41,9 @@
 
     </style>
     <user-option data="{{formData}}" option="{{option}}"></user-option>
-    <user-form data="{{formData}}"  valid="{{valid}}" option="[[option]]" fields={{fields}}></user-form>
+    <user-form id="userForm" data="{{formData}}"  valid="{{valid}}" option="[[option]]" fields={{fields}}></user-form>
     <user-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(option, 'tile')]]"></user-view>
-    <user-action data="{{formData}}" json="[[json]]" valid="[[valid]]" fields=[[fields]] option="[[option]]"></user-action>
+    <user-action data="{{formData}}" json="[[json]]" valid="[[valid]]" fields=[[fields]] option="[[option]]" on-manifest-uploaded="manifestUploadedHandler"></user-action>
    
   </template>
 
@@ -92,6 +92,9 @@
 
       isEqual(a, b) {
         return a == b;
+      }
+      manifestUploadedHandler() {
+        this.$.userForm.validateForm();
       }
     }
 
