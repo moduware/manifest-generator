@@ -1,0 +1,41 @@
+<link rel="import" href="bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="elements/manifest-wrapper.html">
+
+<dom-module id="nexpaq-manifest-generator">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      app-header {
+        height: 40px;
+        line-height: 40px;
+        background-color: #EE3696; 
+        color: white;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      manifest-wrapper {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+    </style>
+    
+    <app-header condenses>
+      <app-toolbar>
+        <div main-title>Nexpaq Manifest Generator</div>
+      </app-toolbar>
+    </app-header>
+    <manifest-wrapper></manifest-wrapper>
+
+  </template>
+  <script>
+    class NexpaqManifestGenerator extends Polymer.Element {
+      static get is() { return 'nexpaq-manifest-generator' }
+    }
+
+    customElements.define(NexpaqManifestGenerator.is, NexpaqManifestGenerator);
+  </script>
+</dom-module>

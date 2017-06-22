@@ -1,0 +1,108 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="nexpaq-tile.html">
+
+<dom-module id="user-view">
+  <template>
+    <style>
+
+      :host {
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        font-size: 14px;
+        padding: 10px;
+        color: #606060;
+      }
+
+      h4 {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+        text-align: center;
+        width: 100%;
+      }
+     
+      .resultOutput {
+        white-space: pre;
+        overflow: scroll;
+        background: white;
+      }
+
+      .tile-container {
+        position: relative;
+        margin: 0 auto;
+        width: 112px; height: 112px;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .tile-container nexpaq-tile {
+        z-index: -1;
+      }
+
+    </style>
+
+    <div>
+        <h4> manifest.json </h4>
+
+        <div class="resultOutput">
+[[renderData(data.*)]]
+        </div>
+
+        <div class="tile-container">
+          <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.textColor]]"></nexpaq-tile>
+        </div>
+    </div>
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class UserView extends Polymer.Element {
+
+      static get is() { return 'user-view' }
+
+      static get properties() {
+        return {
+          data: {
+            type: Object,
+            value: function() {
+              return {};
+            }
+          },
+          renderTile: Boolean,
+          json: {
+            type: String,
+            notify: true
+          }
+        }
+      }
+
+      renderData(data) {
+        //Converts modules string to an Array
+        if (this.data.modules !== undefined && !Array.isArray(this.data.modules)) {
+          this.data.modules = this.data.modules.split(",");
+        }
+        //Stringifies the data
+        var json = JSON.stringify(this.data, null, "\t");
+        this.json = json;
+        return json;
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+      }
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(UserView.is, UserView);
+
+  </script>
+</dom-module>

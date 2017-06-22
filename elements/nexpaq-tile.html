@@ -1,0 +1,76 @@
+<dom-module id="nexpaq-tile">
+  <template>
+  <style>
+    :host,
+    .container {
+      display: block;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+
+    .container {
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+      padding: 22%;
+    }
+
+    .title {
+      position: absolute;
+      top: 4px; left: 8px;
+
+      font-size: 12px;
+    }
+
+    .icon {
+      max-width: 100%;
+    }
+
+
+  </style>
+  <div class="container" style$="background-color:{{color}};color:{{textColor}};">
+    <div class="title">{{title}}</div>
+    <template is="dom-if" if="[[iconSrc]]">
+      <img class="icon" src="{{iconSrc}}">
+    </template>
+  </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'nexpaq-tile',
+      properties: {
+        /* Appearance parameters */
+        title: String,
+        color: String,
+        textColor: String,
+        iconSrc: String
+      },
+      listeners: {
+        down: "handleDown",
+        up: "handleUp"
+      },
+      ready: function() {
+        
+      },
+
+      _tapTimer: null,
+      handleDown: function(e) {
+        var tileObject = this;
+        this._tapTimer = setTimeout(function() {
+          console.log('longtap');
+          tileObject._tapTimer = null;
+          tileObject.fire('longtap', tileObject);
+        }, 5 * 100);
+      },
+      handleUp: function(e) {
+        if (this._tapTimer != null) {
+          clearTimeout(this._tapTimer);
+          console.log('fasttap');
+          this.fire('fasttap', this);
+        }
+      }
+
+    });
+  </script>
+</dom-module>

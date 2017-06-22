@@ -1,0 +1,6 @@
+{
+  "name": "Nexpaq Manifest Generator",
+  "author": "Nexpaq",
+  "description": "Generator of nexpaq manifests for module, tiles, etc..",
+  "orientation": "portrait"
+}

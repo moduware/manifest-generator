@@ -1,0 +1,102 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="user-form.html">
+<link rel="import" href="user-view.html">
+<link rel="import" href="nexpaq-manifest-type-selector.html">
+<link rel="import" href="user-action.html">
+<dom-module id="manifest-wrapper">
+ 
+  <template>
+
+    <style>
+
+      :host {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      user-form,
+      user-view,
+      user-action {
+        width: 47%;
+        min-width: 320px;
+        flex-grow: 1;
+      }
+
+      user-option {
+        margin-bottom: 10px;
+      }
+
+      user-view {
+        margin-left: auto;
+      }
+      user-action {
+        max-width: 400px;
+        margin-left: auto;
+      }
+
+    </style>
+    <nexpaq-manifest-type-selector type="{{type}}"></nexpaq-manifest-type-selector>
+    <user-form id="userForm" data="{{formData}}"  valid="{{valid}}" option="[[type]]" fields={{fields}}></user-form>
+    <user-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]"></user-view>
+    <user-action data="{{formData}}" json="[[json]]" valid="[[valid]]" fields=[[fields]] option="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></user-action>
+   
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class ManifestWrapper extends Polymer.Element {
+
+      static get is() { return 'manifest-wrapper' }
+
+      static get properties() {
+        return {
+          formData: Object,
+          option: String,
+          fields: Array
+        }
+      }
+
+      static get observers() {
+        return [
+          'manifestTypeObserver(type)'
+        ]
+      }
+
+      // Observes changes of current manifest type
+      // and assign's default value to form fields 
+      manifestTypeObserver(option) {
+        if (option == "tile") {
+          this.formData = {
+            color: "black",
+            textColor: "white"
+          };
+        } else if (option == "module")  {
+          this.formData = {
+            size: 1
+          };
+        }
+      }
+
+      // Compares two values and returns true if they are equal
+      isEqual(a, b) {
+        return a == b;
+      }
+
+      // Handles manifest uploaded event and
+      // validates form after successful upload
+      manifestUploadedHandler() {
+        this.$.userForm.validateForm();
+      }
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(ManifestWrapper.is, ManifestWrapper);
+
+  </script>
+</dom-module>

@@ -1,0 +1,78 @@
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+
+<dom-module id="nexpaq-manifest-type-selector">
+  <template>
+    <style>
+
+      :host {
+        display: block;
+        width: 100%;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+        color: #606060;
+      }
+      paper-tabs {
+        --paper-tab-ink: light-grey;
+        --paper-tabs-selection-bar-color: #3367d6;
+      }
+    
+     
+    </style>
+    <paper-tabs id='options' selected="{{selected}}">
+      <paper-tab>TILE</paper-tab>
+      <paper-tab>MODULE</paper-tab>
+    </paper-tabs>
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class UserOption extends Polymer.Element {
+
+      static get is() { return 'nexpaq-manifest-type-selector' }
+
+      static get properties() {
+        return {
+          selected: {
+            type: Number,
+            notify: true,
+            value: 0
+          },
+          type: {
+            type: String,
+            notify: true
+          }
+        }
+      }
+      static get observers() {
+        return [
+          'selectedObserver(selected)'
+        ]
+      }
+
+      constructor() {
+        super();
+      }
+      
+      connectedCallback() {
+        super.connectedCallback();
+      }
+
+      selectedObserver(selected) {
+        if (selected == 0) {
+          this.type = "tile";
+        }
+        if (selected == 1)  {
+          this.type = "module";
+        }
+      }
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(UserOption.is, UserOption);
+
+  </script>
+</dom-module>
