@@ -3,7 +3,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
-<dom-module id="user-option">
+<dom-module id="nexpaq-manifest-type-selector">
   <template>
     <style>
 
@@ -32,7 +32,7 @@
     // Extend Polymer.Element base class
     class UserOption extends Polymer.Element {
 
-      static get is() { return 'user-option' }
+      static get is() { return 'nexpaq-manifest-type-selector' }
 
       static get properties() {
         return {
@@ -41,7 +41,7 @@
             notify: true,
             value: 0
           },
-          option: {
+          type: {
             type: String,
             notify: true
           }
@@ -63,10 +63,10 @@
 
       selectedObserver(selected) {
         if (selected == 0) {
-          this.option = "tile";
+          this.type = "tile";
         }
         if (selected == 1)  {
-          this.option = "module";
+          this.type = "module";
         }
       }
     }
