@@ -2,6 +2,7 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 
 <dom-module id="nexpaq-manifest-actions">
   <template>
@@ -34,6 +35,13 @@
       <input id="upload" name="Select File" type="file" />
     </paper-button>
 
+    <paper-dialog id="modal" modal>
+      <p>I see that you haven't filled the required fields yet.<br> Please fill <strong>{{requiredFields}}</strong> fields!</p>
+      <div class="buttons">
+        <paper-button dialog-confirm autofocus>GOT IT!</paper-button>
+      </div>
+    </paper-dialog>
+
   </template>
 
   <script>
@@ -60,6 +68,9 @@
           type: {
             type: String,
             notify: true
+          },
+          requiredFields: {
+            type: String
           }
         }
       }
@@ -83,7 +94,12 @@
           a.download = 'manifest.json';
           a.click();
         } else {
-          alert("Please fill required fields");
+          if (this.type == "tile") {
+            this.requiredFields = "name, id, version, modules";
+          } else if (this.type == "module") {
+            this.requiredFields = "name, id, firmwareVersion, size";
+          }
+          this.$.modal.open();
         }
       }
 
