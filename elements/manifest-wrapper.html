@@ -67,15 +67,18 @@
         ]
       }
 
-      // Observes changes of current manifest type
-      // and assign's default value to form fields 
-      manifestTypeObserver(option) {
-        if (option == "tile") {
+      /**
+       * Observes changes of current manifest type
+       * and assign's default value to form fields 
+       * @param {string} type Current manifest type
+       */
+      manifestTypeObserver(type) {
+        if (type == "tile") {
           this.formData = {
             color: "black",
             textColor: "white"
           };
-        } else if (option == "module")  {
+        } else if (type == "module")  {
           this.formData = {
             size: 1
           };
