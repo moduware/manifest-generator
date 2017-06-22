@@ -40,7 +40,7 @@
       }
 
     </style>
-    <nexpaq-manifest-type-selector data="{{formData}}" type="{{type}}"></nexpaq-manifest-type-selector>
+    <nexpaq-manifest-type-selector type="{{type}}"></nexpaq-manifest-type-selector>
     <user-form id="userForm" data="{{formData}}"  valid="{{valid}}" option="[[type]]" fields={{fields}}></user-form>
     <user-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]"></user-view>
     <user-action data="{{formData}}" json="[[json]]" valid="[[valid]]" fields=[[fields]] option="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></user-action>
