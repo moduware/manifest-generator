@@ -3,7 +3,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 
-<dom-module id="user-action">
+<dom-module id="nexpaq-manifest-actions">
   <template>
     <style>
       paper-button.indigo {
@@ -15,7 +15,8 @@
         align-items: center;
         justify-content: center;
         font-size: 14px;
-      }           
+      }     
+
       input[type="file"]{
         -webkit-appearance:none; 
         position:absolute;
@@ -24,13 +25,15 @@
         width: 100%;
         height: 100%;
       }
+
     </style>
 
     <paper-button raised class="indigo" id="download">DOWNLOAD</paper-button>
-     <paper-button raised class="indigo">
-        <span>UPLOAD</span>
-        <input name="Select File" type="file" id="input"/>
+    <paper-button raised class="indigo">
+      <span>UPLOAD</span>
+      <input id="upload" name="Select File" type="file" />
     </paper-button>
+
   </template>
 
   <script>
@@ -38,7 +41,7 @@
     // Extend Polymer.Element base class
     class UserAction extends Polymer.Element {
 
-      static get is() { return 'user-action' }
+      static get is() { return 'nexpaq-manifest-actions' }
 
       static get properties() {
         return {
@@ -54,12 +57,8 @@
             type: String,
             notify: true
           },
-          option: {
+          type: {
             type: String,
-            notify: true
-          },
-          fields: {
-            type: Array,
             notify: true
           }
         }
@@ -67,59 +66,69 @@
 
       ready() {
         super.ready();
-        this.$.download.addEventListener('click',  e => {this.clickHandler(this.json)});
-        this.$.input.addEventListener("change", e => {this.fileHandler()});
+        this.$.download.addEventListener('click',  e => {this.downloadHandler(this.json)});
+        this.$.upload.addEventListener("change", e => {this.uploadHandler()});
       }
-
-
 
       connectedCallback() {
         super.connectedCallback();
       }
       
       //Downloads manifest.json file
-      clickHandler(data) {
+      downloadHandler(json) {
         if(this.valid == true) {
           var a = document.createElement('a');
-          var blob = new Blob([data], {'type':'application/octet-stream'});
+          var blob = new Blob([json], {'type':'application/octet-stream'});
           a.href = window.URL.createObjectURL(blob);
           a.download = 'manifest.json';
           a.click();
+        } else {
+          alert("Please fill required fields");
         }
       }
 
-      fileHandler() {
-        var uploadedData;
+      //Uploads the json file
+      uploadHandler() {
         var self = this;
-        var file = this.$.input.files[0];
+        var file = this.$.upload.files[0];
         
         if (file) {
+          //Instantiates File Reader
           var reader = new FileReader();
           reader.readAsText(file, "UTF-8");
-          //Parses the data when it is loaded
+          
+          //Parses the content of uploaded file and triggers
+          //manifest-uploaded event
           reader.onload = function (evt) {
             var uploadedFileContent = evt.target.result;
             self.parseManifest(uploadedFileContent);
             self.dispatchEvent(new CustomEvent('manifest-uploaded', {}));
           }
          
+         //Alerts if error occurs on reading file
           reader.onerror = function (evt) {
             alert("error reading file");
           }
         }
       }
 
+      //Parses uploaded file content and binds to data 
       parseManifest (manifestJSON) {
         var allowedFields = [];
         var renderedData = {};
-        
-        if (this.option == "tile") {
+
+        //Specifies the allowed fields in data object
+        //based on manifest type
+        if (this.type == "tile") {
           allowedFields = ["name", "id","description", "changes", "version", "minimumAppVersion", "modules", "title", "color", "textColor"];
         } else {
           allowedFields = ["name", "id","description", "changes", "firmwareVersion", "size", "orientation", "defaultTile"];
         }
 
         var manifest = JSON.parse(manifestJSON);
+        
+        //Filters manifest object based on allowed 
+        //fields in the form.
         for (var key in manifest) {
           if (allowedFields.indexOf(key) !== -1) {
             renderedData[key] = manifest[key]

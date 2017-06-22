@@ -6,7 +6,7 @@
 <link rel="import" href="user-form.html">
 <link rel="import" href="user-view.html">
 <link rel="import" href="nexpaq-manifest-type-selector.html">
-<link rel="import" href="user-action.html">
+<link rel="import" href="nexpaq-manifest-actions.html">
 <dom-module id="manifest-wrapper">
  
   <template>
@@ -21,7 +21,7 @@
 
       user-form,
       user-view,
-      user-action {
+      nexpaq-manifest-actions {
         width: 47%;
         min-width: 320px;
         flex-grow: 1;
@@ -34,7 +34,7 @@
       user-view {
         margin-left: auto;
       }
-      user-action {
+      nexpaq-manifest-actions {
         max-width: 400px;
         margin-left: auto;
       }
@@ -43,7 +43,7 @@
     <nexpaq-manifest-type-selector type="{{type}}"></nexpaq-manifest-type-selector>
     <user-form id="userForm" data="{{formData}}"  valid="{{valid}}" option="[[type]]" fields={{fields}}></user-form>
     <user-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]"></user-view>
-    <user-action data="{{formData}}" json="[[json]]" valid="[[valid]]" fields=[[fields]] option="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></user-action>
+    <nexpaq-manifest-actions data="{{formData}}" json="[[json]]" valid="[[valid]]" type="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></nexpaq-manifest-actions>
    
   </template>
 
