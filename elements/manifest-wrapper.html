@@ -3,7 +3,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="user-form.html">
+<link rel="import" href="nexpaq-manifest-form.html">
 <link rel="import" href="user-view.html">
 <link rel="import" href="nexpaq-manifest-type-selector.html">
 <link rel="import" href="nexpaq-manifest-actions.html">
@@ -19,7 +19,7 @@
         width: 100%;
       }
 
-      user-form,
+      nexpaq-manifest-form,
       user-view,
       nexpaq-manifest-actions {
         width: 47%;
@@ -41,7 +41,7 @@
 
     </style>
     <nexpaq-manifest-type-selector type="{{type}}"></nexpaq-manifest-type-selector>
-    <user-form id="userForm" data="{{formData}}"  valid="{{valid}}" option="[[type]]" fields={{fields}}></user-form>
+    <nexpaq-manifest-form id="userForm" data="{{formData}}"  valid="{{valid}}" type="[[type]]" fields={{fields}}></nexpaq-manifest-form>
     <user-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]"></user-view>
     <nexpaq-manifest-actions data="{{formData}}" json="[[json]]" valid="[[valid]]" type="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></nexpaq-manifest-actions>
    
@@ -57,7 +57,6 @@
       static get properties() {
         return {
           formData: Object,
-          option: String,
           fields: Array
         }
       }
@@ -81,6 +80,9 @@
             size: 1
           };
         }
+        //Required for form to be validated on type changes,
+        //after the manifest-uploaded event triggered.
+        this.$.userForm.validateForm();
       }
 
       // Compares two values and returns true if they are equal
