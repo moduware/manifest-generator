@@ -98,7 +98,7 @@
           reader.onload = function (evt) {
             var uploadedFileContent = evt.target.result;
             self.parseManifest(uploadedFileContent);
-            self.dispatchEvent(new CustomEvent('manifestUploaded', {}));
+            self.dispatchEvent(new CustomEvent('manifest-uploaded', {}));
           }
          
           reader.onerror = function (evt) {
