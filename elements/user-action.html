@@ -90,6 +90,23 @@
         var uploadedData;
         var self = this;
         var file = this.$.input.files[0];
+        
+        if (file) {
+          var reader = new FileReader();
+          reader.readAsText(file, "UTF-8");
+          //Parses the data when it is loaded
+          reader.onload = function (evt) {
+            var uploadedFileContent = evt.target.result;
+            self.parseManifest(uploadedFileContent);
+          }
+         
+          reader.onerror = function (evt) {
+            alert("error reading file");
+          }
+        }
+      }
+
+      parseManifest (manifestJSON) {
         var allowedFields = [];
         var renderedData = {};
         
@@ -99,30 +116,14 @@
           allowedFields = ["name", "id","description", "changes", "firmwareVersion", "size", "orientation", "defaultTile"];
         }
 
-        if (file) {
-          var reader = new FileReader();
-          reader.readAsText(file, "UTF-8");
-          //Parses the data when it is loaded
-          reader.onload = function (evt) {
-            var target = evt.target.result;
-            uploadedData = JSON.parse(target);
-          }
-          //Waits for the 
-          setTimeout(function() {
-            //Creates object based in the
-            for (var key in uploadedData) {
-              if (allowedFields.indexOf(key) !== -1) {
-                renderedData[key] = uploadedData[key]
-              }
-            }
-            self.set("data", renderedData);
-            self.notifyPath("data");
-          }, 500);
-         
-          reader.onerror = function (evt) {
-            alert("error reading file");
+        var manifest = JSON.parse(manifestJSON);
+        for (var key in manifest) {
+          if (allowedFields.indexOf(key) !== -1) {
+            renderedData[key] = manifest[key]
           }
         }
+        this.set("data", renderedData);
+        this.notifyPath("data");
       }
     }
     // Register custom element definition using standard platform API
