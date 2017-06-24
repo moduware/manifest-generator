@@ -41,6 +41,15 @@
         <paper-button dialog-confirm autofocus>GOT IT!</paper-button>
       </div>
     </paper-dialog>
+    <paper-dialog id="confirm" modal="true" on-iron-overlay-closed="dismissDialog">
+      <paper-dialog-scrollable>
+        We found unfamiliar field/fields on your uploaded manifest file. Would you like to keep them in your manifest and continue?
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-confirm>YES</paper-button>
+        <paper-button dialog-dismiss>NO</paper-button>
+      </div>
+    </paper-dialog>
 
   </template>
 
@@ -71,12 +80,16 @@
           },
           requiredFields: {
             type: String
+          },
+          allowedFields: {
+            type: String
           }
         }
       }
 
       ready() {
         super.ready();
+        this.manifest={};
         this.$.download.addEventListener('click',  e => {this.downloadHandler(this.json)});
         this.$.upload.addEventListener("change", e => {this.uploadHandler()});
       }
@@ -130,29 +143,51 @@
 
       //Parses uploaded file content and binds to data 
       parseManifest (manifestJSON) {
-        var allowedFields = [];
-        var renderedData = {};
+        this.manifest = JSON.parse(manifestJSON);
+       
+        this.setAllowedFields();
 
-        //Specifies the allowed fields in data object
-        //based on manifest type
-        if (this.type == "tile") {
-          allowedFields = ["name", "id","description", "changes", "version", "minimumAppVersion", "modules", "title", "color", "textColor"];
-        } else {
-          allowedFields = ["name", "id","description", "changes", "firmwareVersion", "size", "orientation", "defaultTile"];
+        //Checks if there is unfamiliar field in uploaded content.
+        for (var key in this.manifest) {
+          if (this.allowedFields.indexOf(key) === -1) {
+            this.$.confirm.open();
+            return;
+          } 
         }
-
-        var manifest = JSON.parse(manifestJSON);
-        
-        //Filters manifest object based on allowed 
-        //fields in the form.
-        for (var key in manifest) {
-          if (allowedFields.indexOf(key) !== -1) {
-            renderedData[key] = manifest[key]
-          }
-        }
-        this.set("data", renderedData);
+        //if all familiar content, sets uploaded data to manifest.
+        this.set("data", this.manifest);
         this.notifyPath("data");
       }
+
+      //Specifies the allowed fields in data object
+      //based on manifest type
+      setAllowedFields() {
+        if (this.type == "tile") {
+          this.allowedFields = ["name", "id","description", "changes", "version", "minimumAppVersion", "modules", "title", "color", "textColor"];
+        } else {
+          this.allowedFields = ["name", "id","description", "changes", "firmwareVersion", "size", "orientation", "defaultTile"];
+        }
+      }
+
+      // Handles the data object based on the user's decision of
+      //keeping unfamiliar data or not.
+      dismissDialog() {
+        var renderedData = {};
+        if (this.$.confirm.closingReason.confirmed) {
+          this.set("data", this.manifest);
+        } else {
+        //Filters manifest object based on allowed 
+        //fields in the form.
+          for (var key in this.manifest) {
+            if (this.allowedFields.indexOf(key) !== -1) {
+              renderedData[key] = this.manifest[key]
+            }
+          }
+          this.set("data", renderedData);
+        }
+        this.notifyPath("data");
+      }
+
     }
     // Register custom element definition using standard platform API
     customElements.define(UserAction.is, UserAction);
