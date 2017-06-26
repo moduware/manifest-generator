@@ -88,13 +88,17 @@
         this.$.userForm.validateForm();
       }
 
-      // Compares two values and returns true if they are equal
+      /**
+       * Compares two values and returns true if they are equal.
+       */ 
       isEqual(a, b) {
         return a == b;
       }
 
-      // Handles manifest uploaded event and
-      // validates form after successful upload
+      /**
+       * Handles manifest uploaded event and validates form
+       *after successful upload.
+       */ 
       manifestUploadedHandler() {
         this.$.userForm.validateForm();
       }

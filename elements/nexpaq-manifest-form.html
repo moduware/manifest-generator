@@ -114,28 +114,15 @@
         }
       }
 
-      static get observers() {
-        return [
-          'selectedTypeObserver(type)'
-        ]
-      }
-
       ready() {
         super.ready();
       }
 
-      selectedTypeObserver(manifestType) {
-        //this.fields = [];
-        //Dynamically creates the allowed fields based on the id in the current template
-        // var inputFields = Polymer.dom(this.root).querySelectorAll("paper-input");
-        // console.log(inputFields);
-        // for (var i=0; i< inputFields.length; i++) {
-        //   this.push("fields", inputFields[i].id);
-        // }
-      // Polymer.dom(this.root).querySelector("template").iterator_.updateIteratedValue();
-      }
-
-
+      /**
+       * Validates the form by checking each 
+       * paper input field.
+       * @param {object} 
+       */
       validateForm() {
         var paperInputs = Polymer.dom(this.root).querySelectorAll("paper-input");
         for (var i=0; i<paperInputs.length; i++) {
@@ -148,6 +135,11 @@
         return;
       }
       
+      /**
+       * Checks if the field is valid and required
+       * field is filled.
+       * @param {object} 
+       */
       validateField(field) {
         if(field.invalid) return false;
         if(field.required) {
@@ -155,7 +147,11 @@
         }  
         return true;
       }
-
+  
+      /**
+       * Checks if the selected option is tile
+       * @param {string} 
+       */
       checkOption(option) {
         if(option == "tile") return 1;
         else return 0;
