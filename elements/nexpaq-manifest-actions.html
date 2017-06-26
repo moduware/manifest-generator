@@ -97,7 +97,10 @@
         super.connectedCallback();
       }
       
-      //Downloads manifest.json file
+      /**
+       * Downloads the manifest file
+       * @param {object}
+       */
       downloadHandler(json) {
         if(this.valid == true) {
           var a = document.createElement('a');
@@ -115,7 +118,9 @@
         }
       }
 
-      //Uploads the json file
+      /**
+       * Uploads the selected json file
+       */
       uploadHandler() {
         var self = this;
         var file = this.$.upload.files[0];
@@ -140,7 +145,10 @@
         }
       }
 
-      //Parses uploaded file content and binds to data 
+      /**
+       * Parses uploaded file content and binds to data
+       * @param {object} type json
+       */
       parseManifest (manifestJSON) {
         this.manifest = JSON.parse(manifestJSON);
        
@@ -158,8 +166,10 @@
         this.notifyPath("data");
       }
 
-      //Specifies the allowed fields in data object
-      //based on manifest type
+      /**
+      * Specifies the allowed fields in data object
+      * based on manifest type
+      */
       setAllowedFields() {
         if (this.type == "tile") {
           this.allowedFields = ["name", "id","description", "changes", "version", "minimumAppVersion", "modules", "title", "color", "textColor"];
@@ -168,8 +178,10 @@
         }
       }
 
-      // Handles the data object based on the user's decision of
-      //keeping unfamiliar data or not.
+      /**
+      * Modifies the data object based on the user's decision to
+      * keep unfamiliar data or not
+      */
       dismissDialog() {
         var renderedData = {};
         if (this.$.confirm.closingReason.confirmed) {
