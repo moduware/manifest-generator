@@ -3,11 +3,11 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="user-form.html">
-<link rel="import" href="user-view.html">
+<link rel="import" href="nexpaq-manifest-form.html">
+<link rel="import" href="nexpaq-manifest-view.html">
 <link rel="import" href="nexpaq-manifest-type-selector.html">
-<link rel="import" href="user-action.html">
-<dom-module id="manifest-wrapper">
+<link rel="import" href="nexpaq-manifest-actions.html">
+<dom-module id="nexpaq-manifest-interface">
  
   <template>
 
@@ -19,31 +19,31 @@
         width: 100%;
       }
 
-      user-form,
-      user-view,
-      user-action {
+      nexpaq-manifest-form,
+      nexpaq-manifest-view,
+      nexpaq-manifest-actions {
         width: 47%;
         min-width: 320px;
         flex-grow: 1;
       }
 
-      user-option {
+      nexpaq-manifest-type-selector {
         margin-bottom: 10px;
       }
 
-      user-view {
+      nexpaq-manifest-view{
         margin-left: auto;
       }
-      user-action {
+      nexpaq-manifest-actions {
         max-width: 400px;
         margin-left: auto;
       }
 
     </style>
     <nexpaq-manifest-type-selector type="{{type}}"></nexpaq-manifest-type-selector>
-    <user-form id="userForm" data="{{formData}}"  valid="{{valid}}" option="[[type]]" fields={{fields}}></user-form>
-    <user-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]"></user-view>
-    <user-action data="{{formData}}" json="[[json]]" valid="[[valid]]" fields=[[fields]] option="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></user-action>
+    <nexpaq-manifest-form id="userForm" data="{{formData}}"  valid="{{valid}}" type="[[type]]" fields={{fields}}></nexpaq-manifest-form>
+    <nexpaq-manifest-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]"></nexpaq-manifest-view>
+    <nexpaq-manifest-actions data="{{formData}}" json="[[json]]" valid="[[valid]]" type="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></nexpaq-manifest-actions>
    
   </template>
 
@@ -52,12 +52,11 @@
     // Extend Polymer.Element base class
     class ManifestWrapper extends Polymer.Element {
 
-      static get is() { return 'manifest-wrapper' }
+      static get is() { return 'nexpaq-manifest-interface' }
 
       static get properties() {
         return {
           formData: Object,
-          option: String,
           fields: Array
         }
       }
@@ -68,28 +67,38 @@
         ]
       }
 
-      // Observes changes of current manifest type
-      // and assign's default value to form fields 
-      manifestTypeObserver(option) {
-        if (option == "tile") {
+      /**
+       * Observes changes of current manifest type
+       * and assign's default value to form fields 
+       * @param {string} type Current manifest type
+       */
+      manifestTypeObserver(type) {
+        if (type == "tile") {
           this.formData = {
             color: "black",
             textColor: "white"
           };
-        } else if (option == "module")  {
+        } else if (type == "module")  {
           this.formData = {
             size: 1
           };
         }
+        //Required for form to be validated on type changes,
+        //after the manifest-uploaded event triggered.
+        this.$.userForm.validateForm();
       }
 
-      // Compares two values and returns true if they are equal
+      /**
+       * Compares two values and returns true if they are equal.
+       */ 
       isEqual(a, b) {
         return a == b;
       }
 
-      // Handles manifest uploaded event and
-      // validates form after successful upload
+      /**
+       * Handles manifest uploaded event and validates form
+       *after successful upload.
+       */ 
       manifestUploadedHandler() {
         this.$.userForm.validateForm();
       }

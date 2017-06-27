@@ -4,7 +4,7 @@
 <link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../bower_components/neon-animation/web-animations.html">
 
-<dom-module id="user-form">
+<dom-module id="nexpaq-manifest-form">
   <template>
 
     <style>
@@ -23,6 +23,7 @@
         font-size: 13px;
       }
     </style>
+
     <paper-input always-float-label id="name" label="Name" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
     <paper-tooltip for="name" offset="-7" position="bottom">ex : Laser Pointer</paper-tooltip>
      
@@ -35,7 +36,7 @@
     <paper-input always-float-label id="changes" label="Changes" value="{{data.changes}}" maxlength="120"></paper-input>
     <paper-tooltip for="changes" offset="-7" position="bottom">ex : Smaller package size</paper-tooltip>
     
-    <template id="tile" is="dom-if" if="{{checkOption(option)}}" restamp="true" >
+    <template id="tile" is="dom-if" if="{{checkOption(type)}}" restamp="true" >
       <paper-tooltip for="identify" offset="-7" position="bottom" >ex : nexpaq.tile.laser</paper-tooltip>
 
       <paper-input always-float-label id="version" label="Version" value="{{data.version}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20" on-change="validateForm"></paper-input>
@@ -57,7 +58,7 @@
       <paper-tooltip for="textColor" offset="-7" position="bottom">ex : white</paper-tooltip>
     </template>
 
-    <template id="module" is="dom-if" if="{{!checkOption(option)}}" restamp="true">
+    <template id="module" is="dom-if" if="{{!checkOption(type)}}" restamp="true">
       <paper-tooltip for="identify" offset="-7" position="bottom" >ex : nexpaq.module.laser </paper-tooltip>
 
       <paper-input always-float-label id="firmwareVersion" label="FirmwareVersion" value="{{data.firmwareVersion}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20" on-change="validateForm"></paper-input>
@@ -80,7 +81,7 @@
     // Extend Polymer.Element base class
     class UserForm extends Polymer.Element {
 
-      static get is() { return 'user-form' }
+      static get is() { return 'nexpaq-manifest-form' }
       
       static get properties() {
         return {
@@ -91,10 +92,6 @@
               return {};
             }
           },
-          selected: {
-            type: Number,
-            notify: true
-          },
           valid: {
             type: Boolean,
             notify: true,
@@ -102,7 +99,7 @@
               return false;
             }
           },
-          option: {
+          type: {
             type: String,
             notify: true
            
@@ -117,37 +114,17 @@
         }
       }
 
-      static get observers() {
-        return [
-          'selectedOptionObserver(option)'
-        ]
-      }
-
       ready() {
         super.ready();
       }
 
-
-      connectedCallback() {
-        super.connectedCallback();
-      }
-
-      selectedOptionObserver(option) {
-        //this.fields = [];
-        //Dynamically creates the allowed fields based on the id in the current template
-        // var inputFields = Polymer.dom(this.root).querySelectorAll("paper-input");
-        // console.log(inputFields);
-        // for (var i=0; i< inputFields.length; i++) {
-        //   this.push("fields", inputFields[i].id);
-        // }
-      // Polymer.dom(this.root).querySelector("template").iterator_.updateIteratedValue();
-      }
-
-
+      /**
+       * Validates the form by checking each 
+       * paper input field.
+       * @param {object} 
+       */
       validateForm() {
-        console.log("validated");
         var paperInputs = Polymer.dom(this.root).querySelectorAll("paper-input");
-        console.log(paperInputs);
         for (var i=0; i<paperInputs.length; i++) {
           if (!this.validateField(paperInputs[i])) {
             this.valid = false;
@@ -158,6 +135,11 @@
         return;
       }
       
+      /**
+       * Checks if the field is valid and required
+       * field is filled.
+       * @param {object} 
+       */
       validateField(field) {
         if(field.invalid) return false;
         if(field.required) {
@@ -165,7 +147,11 @@
         }  
         return true;
       }
-
+  
+      /**
+       * Checks if the selected option is tile
+       * @param {string} 
+       */
       checkOption(option) {
         if(option == "tile") return 1;
         else return 0;
