@@ -44,7 +44,12 @@
         title: String,
         color: String,
         textColor: String,
-        iconSrc: String
+        iconSrc: {
+          type: String,
+          value: function() {
+            return "../img/icon.svg";
+          }
+        }
       },
       listeners: {
         down: "handleDown",
