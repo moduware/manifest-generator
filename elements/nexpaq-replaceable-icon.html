@@ -35,6 +35,27 @@
           src: String,
         }
       }
+
+      ready() {
+        super.ready();
+        this.$.fileField.addEventListener("change", e => {this.uploadHandler()});
+      }
+
+      uploadHandler(event) {
+        var file = this.$.fileField.files[0];
+
+        if (file) {
+          //Instantiates File Reader
+          var reader = new FileReader();
+
+          var self = this;
+          reader.addEventListener("load", function () {
+            self.src = reader.result;
+          }, false);
+
+          reader.readAsDataURL(file);
+        }
+      }
     }
 
     // Register custom element definition using standard platform API
