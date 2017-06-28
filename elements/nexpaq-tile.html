@@ -13,7 +13,7 @@
 
       justify-content: center;
       align-items: center;
-      padding: 22%;
+      padding: 21%;
     }
 
     .title {
@@ -23,17 +23,10 @@
       font-size: 12px;
     }
 
-    .icon {
-      max-width: 100%;
-    }
-
-
   </style>
   <div class="container" style$="background-color:{{color}};color:{{textColor}};">
     <div class="title">{{title}}</div>
-    <template is="dom-if" if="[[iconSrc]]">
-      <img class="icon" src="{{iconSrc}}">
-    </template>
+    <slot></slot>
   </div>
   </template>
   <script>
@@ -43,18 +36,13 @@
         /* Appearance parameters */
         title: String,
         color: String,
-        textColor: String,
-        iconSrc: {
-          type: String,
-          value: function() {
-            return "../img/icon.svg";
-          }
-        }
+        textColor: String
       },
       listeners: {
         down: "handleDown",
         up: "handleUp"
       },
+
       ready: function() {
         
       },
