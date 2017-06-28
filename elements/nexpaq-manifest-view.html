@@ -30,6 +30,7 @@
         white-space: pre;
         overflow: scroll;
         background: white;
+        line-height: 18px;
       }
 
       .tile-container {
@@ -50,7 +51,7 @@
     <div>
         <h4> manifest.json </h4>
 
-        <div class="resultOutput">
+        <div class="resultOutput" style$="max-height: [[calculatePixelsInLines(maxLines)]]px;">
 [[renderData(data.*)]]
         </div>
 
@@ -81,7 +82,8 @@
           json: {
             type: String,
             notify: true
-          }
+          },
+          maxLines: Number
         }
       }
 
@@ -100,13 +102,10 @@
         return json;
       }
 
-      ready() {
-        super.ready();
+      calculatePixelsInLines (maxLines) {
+        return maxLines * 18;
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-      }
     }
 
     // Register custom element definition using standard platform API
