@@ -3,6 +3,8 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
+
 
 <dom-module id="nexpaq-manifest-actions">
   <template>
@@ -29,9 +31,9 @@
     
     </style>
 
-    <paper-button raised class="indigo" id="download">DOWNLOAD</paper-button>
+    <paper-button raised class="indigo" id="download">{{localize('button_1')}}</paper-button>
     <paper-button raised class="indigo">
-      <span>UPLOAD</span>
+      <span>{{localize('button_2')}}</span>
       <input id="upload" name="Select File" type="file" />
     </paper-button>
 
@@ -55,7 +57,7 @@
   <script>
 
     // Extend Polymer.Element base class
-    class UserAction extends Polymer.Element {
+    class UserAction extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
 
       static get is() { return 'nexpaq-manifest-actions' }
 
@@ -82,6 +84,25 @@
           },
           allowedFields: {
             type: String
+          },
+          language: {
+            value: 'en',
+            type: String
+          },
+          resources: {
+            type: Object,
+            value: function() {
+              return {
+                'en': {
+                  'button_1': 'DOWNLOAD',
+                  'button_2': 'UPLOAD'
+                },
+                'esp' : {
+                  'button_1': 'DESCARGAR',
+                  'button_2': 'SUBIR'
+                }
+              };
+            }
           }
         }
       }

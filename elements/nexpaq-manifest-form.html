@@ -3,6 +3,7 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
 
 <dom-module id="nexpaq-manifest-form">
   <template>
@@ -30,77 +31,73 @@
       }
     </style>
 
-    <h4> Requirements</h4>
-    <paper-input always-float-label id="name" label="Name" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
+    <h4>{{localize('header_1')}}</h4>
+    <paper-input always-float-label id="name" label="{{localize('label_1')}}" value="{{data.name}}" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
     <paper-tooltip for="name" offset="-7" position="bottom">ex : Laser Pointer</paper-tooltip>
 
-    <paper-input always-float-label id="id" label="ID" value="{{data.id}}"  allowed-pattern="[A-Za-z_\.\-0-9]" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
+    <paper-input always-float-label id="id" label="{{localize('label_2')}}" value="{{data.id}}"  allowed-pattern="[A-Za-z_\.\-0-9]" required auto-validate error-message="This field is required!" maxlength="50" on-change="validateForm"></paper-input>
 
-    <paper-input always-float-label id="description" label="Description" value="{{data.description}}" maxlength="150"></paper-input>
+    <paper-input always-float-label id="description" label="{{localize('label_3')}}" value="{{data.description}}" maxlength="150"></paper-input>
     <paper-tooltip for="description" offset="-7" position="bottom">ex : Nexpaq Laser module interface</paper-tooltip>
     
     <template id="tile" is="dom-if" if="{{checkOption(type)}}" restamp="true" >
       <paper-tooltip for="id" offset="-7" position="bottom" >ex : nexpaq.tile.laser</paper-tooltip>
 
-      <paper-input always-float-label id="version" label="Version" value="{{data.version}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20" on-change="validateForm"></paper-input>
+      <paper-input always-float-label id="version" label="{{localize('label_4')}}" value="{{data.version}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20" on-change="validateForm"></paper-input>
       <paper-tooltip for="version" offset="-7" position="bottom">ex : 1.0.0</paper-tooltip>
       
-      <paper-input always-float-label id="modules" label="Modules" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="150" on-change="validateForm"></paper-input>
+      <paper-input always-float-label id="modules" label="{{localize('label_5')}}" value="{{data.modules}}" required auto-validate error-message="This field is required!" maxlength="150" on-change="validateForm"></paper-input>
       <paper-tooltip for="modules" offset="-7" position="bottom">ex : nexpaq.module.laser, nexpaq.module.range</paper-tooltip>
     </template>
 
     <template id="module" is="dom-if" if="{{!checkOption(type)}}" restamp="true">
       <paper-tooltip for="id" offset="-7" position="bottom" >ex : nexpaq.module.laser </paper-tooltip>
 
-      <paper-input always-float-label id="firmwareVersion" label="FirmwareVersion" value="{{data.firmwareVersion}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20" on-change="validateForm"></paper-input>
+      <paper-input always-float-label id="firmwareVersion" label="{{localize('label_6')}}" value="{{data.firmwareVersion}}" required auto-validate error-message="This field is required!" allowed-pattern="[0-9_\.]" maxlength="20" on-change="validateForm"></paper-input>
       <paper-tooltip for="firmwareVersion" offset="-7" position="bottom">ex : 1.0.0</paper-tooltip>
 
-      <paper-input always-float-label id="size" label="Size" value="{{data.size}}" allowed-pattern="[0-9]" required auto-validate error-message="This field is required!" maxlength="5" on-change="validateForm"></paper-input>
+      <paper-input always-float-label id="size" label="{{localize('label_7')}}" value="{{data.size}}" allowed-pattern="[0-9]" required auto-validate error-message="This field is required!" maxlength="5" on-change="validateForm"></paper-input>
       <paper-tooltip for="size" offset="-7" position="bottom">ex : 1</paper-tooltip>
     </template>
 
-    <h4> Meta </h4>
-    <template id="tile" is="dom-if" if="{{checkOption(type)}}" restamp="true" >
-
-      <paper-input always-float-label id="changes" label="Changes" value="{{data.changes}}" maxlength="120"></paper-input>
-      <paper-tooltip for="changes" offset="-7" position="bottom">ex : Smaller package size</paper-tooltip>
+    <h4>{{localize('header_2')}}</h4>
+    <paper-input always-float-label id="changes" label="{{localize('label_8')}}" value="{{data.changes}}" maxlength="120"></paper-input>
+    <paper-tooltip for="changes" offset="-7" position="bottom">ex : Smaller package size</paper-tooltip>
     
-      <paper-input always-float-label id="minimumAppVersion" label="MinimumAppVersion" value="{{data.minimumAppVersion}}" allowed-pattern="[0-9_\.]" maxlength="20"></paper-input>
+    <template id="tile" is="dom-if" if="{{checkOption(type)}}" restamp="true" >
+      <paper-input always-float-label id="minimumAppVersion" label="{{localize('label_9')}}" value="{{data.minimumAppVersion}}" allowed-pattern="[0-9_\.]" maxlength="20"></paper-input>
       <paper-tooltip for="minumumAppVersion" offset="-7" position="bottom">ex : 1.0.0</paper-tooltip>
     </template>
 
     <template id="module" is="dom-if" if="{{!checkOption(type)}}" restamp="true">
 
-      <paper-input always-float-label id="changes" label="Changes" value="{{data.changes}}" maxlength="120"></paper-input>
-      <paper-tooltip for="changes" offset="-7" position="bottom">ex : Smaller package size</paper-tooltip>
-
-      <paper-input always-float-label id="orientation" label="Orientation" value="{{data.orientation}}"></paper-input>
+      <paper-input always-float-label id="orientation" label="{{localize('label_10')}}" value="{{data.orientation}}"></paper-input>
       <paper-tooltip for="orientation" offset="-7" position="bottom">ex : up</paper-tooltip>
       
-      <paper-input always-float-label id="defaultTile" label="Default Tile" value="{{data.defaultTile}}" allowed-pattern="[A-Za-z_\.\-0-9]" maxlength="5"></paper-input>
+      <paper-input always-float-label id="defaultTile" label="{{localize('label_11')}}" value="{{data.defaultTile}}" allowed-pattern="[A-Za-z_\.\-0-9]" maxlength="5"></paper-input>
       <paper-tooltip for="defaultTile" offset="-7" position="bottom">ex : nexpaq.tile.laser</paper-tooltip>
     </template>
 
     <template id="tile" is="dom-if" if="{{checkOption(type)}}" restamp="true" >
-      <h4> Appearance </h4>
+      <h4>{{localize('header_3')}}</h4>
   
-      <paper-input always-float-label id="title" label="Title" value="{{data.title}}" maxlength="20"></paper-input>
+      <paper-input always-float-label id="title" label="{{localize('label_12')}}" value="{{data.title}}" maxlength="20"></paper-input>
       <paper-tooltip for="title" offset="-7" position="bottom">ex : Laser</paper-tooltip>
 
-      <paper-input always-float-label id="color" label="Color" value="{{data.color}}" maxlength="20"></paper-input>
+      <paper-input always-float-label id="color" label="{{localize('label_13')}}" value="{{data.color}}" maxlength="20"></paper-input>
       <paper-tooltip for="color" offset="-7" position="bottom">ex : #606060</paper-tooltip>
      
-      <paper-input always-float-label id="textColor" label="Text Color" value="{{data.textColor}}" maxlength="20"></paper-input>
+      <paper-input always-float-label id="textColor" label="{{localize('label_14')}}" value="{{data.textColor}}" maxlength="20"></paper-input>
       <paper-tooltip for="textColor" offset="-7" position="bottom">ex : white</paper-tooltip>
     </template>  
   </template>
   <script>
 
     // Extend Polymer.Element base class
-    class UserForm extends Polymer.Element {
+    class UserForm extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
 
       static get is() { return 'nexpaq-manifest-form' }
-      
+
       static get properties() {
         return {
           data: {
@@ -128,6 +125,55 @@
             value: function() {
               return [];
             }
+          },
+          language: {
+            value: 'en',
+            type: String
+          },
+          resources: {
+            type: Object,
+            value: function() {
+              return {
+                'en': {
+                  'header_1': 'Requirements',
+                  'header_2': 'Meta',
+                  'header_3': 'Appearance',
+                  'label_1': 'Name',
+                  'label_2': 'ID',
+                  'label_3': 'Description',
+                  'label_4': 'Version',
+                  'label_5': 'Modules',
+                  'label_6': 'FirmwareVersion',
+                  'label_7': 'Size',
+                  'label_8': 'Changes',
+                  'label_9': 'MinimumAppVersion',
+                  'label_10': 'Orientation',
+                  'label_11': 'Default Tile',
+                  'label_12': 'Title',
+                  'label_13': 'Color',
+                  'label_14': 'Text Color'
+                },
+                'esp' : {
+                  'header_1': 'Requisitos',
+                  'header_2': 'Meta',
+                  'header_3': 'Apariencia',
+                  'label_1': 'Nombre',
+                  'label_2': 'ID',
+                  'label_3': 'Descripcion',
+                  'label_4': 'Version',
+                  'label_5': 'Modulos',
+                  'label_6': 'Version de Firmware',
+                  'label_7': 'Tamano',
+                  'label_8': 'Cambios',
+                  'label_9': 'Version minima de la app',
+                  'label_10': 'Orientacion',
+                  'label_11': 'Mosaico predeterminado',
+                  'label_12': 'Titulo',
+                  'label_13': 'Color',
+                  'label_14': 'Color de texto'
+                }
+              };
+            }
           }
         }
       }
@@ -135,7 +181,7 @@
       ready() {
         super.ready();
       }
-
+    
       /**
        * Validates the form by checking each 
        * paper input field.

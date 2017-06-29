@@ -56,10 +56,10 @@
 
     </style>
     <nexpaq-manifest-type-selector type="{{type}}"></nexpaq-manifest-type-selector>
-    <nexpaq-manifest-form id="userForm" data="{{formData}}"  valid="{{valid}}" type="[[type]]" fields={{fields}}></nexpaq-manifest-form>
+    <nexpaq-manifest-form id="userForm" data="{{formData}}"  valid="{{valid}}" type="[[type]]" fields={{fields}} language=[[language]]></nexpaq-manifest-form>
     <div class="column-container">
       <nexpaq-manifest-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]" max-lines="18"></nexpaq-manifest-view>
-      <nexpaq-manifest-actions data="{{formData}}" json="[[json]]" valid="[[valid]]" type="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></nexpaq-manifest-actions>
+      <nexpaq-manifest-actions data="{{formData}}" json="[[json]]" valid="[[valid]]" type="[[type]]" on-manifest-uploaded="manifestUploadedHandler" language=[[language]]></nexpaq-manifest-actions>
     </div>
   </template>
 
@@ -73,7 +73,11 @@
       static get properties() {
         return {
           formData: Object,
-          fields: Array
+          fields: Array,
+          language: {
+            value: 'en',
+            type: String
+          }
         }
       }
 
