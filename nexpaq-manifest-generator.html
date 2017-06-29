@@ -40,6 +40,63 @@
         padding-right: 20px;
       }
 
+      .onoffswitch {
+        position: relative; 
+        width: 40px;
+        margin-left: 20px;
+        -webkit-user-select: none;
+        -moz-user-select:none;
+        -ms-user-select: none;
+      }
+      .onoffswitch-checkbox {
+        display: none;
+      }
+      .onoffswitch-label {
+        display: block;
+        overflow: hidden;
+        border: 2px solid #FFFFFF;
+        border-radius: 17px;
+      }
+      .onoffswitch-inner {
+        display: block;
+        transition: margin 0.3s ease-in 0s;
+      }
+      .onoffswitch-inner:before, .onoffswitch-inner:after {
+        float: left;
+        width: 50%;
+        height: 13px;
+        box-sizing: border-box;
+      }
+      .onoffswitch-inner:before {
+        content: "";
+        padding-left: 10px;
+        background-color: #9E9E9E;
+        color: #FFFFFF;
+      }
+      .onoffswitch-inner:after {
+        content: "";
+        padding-right: 10px;
+        background-color: #9E9E9E;
+      }
+      .onoffswitch-switch {
+        display: block;
+        width: 19px;
+        margin: -3px;
+        background: #EE3696;
+        position: absolute;
+        top: 0; bottom: 0;
+        right: 23px;
+        border: 2px solid #FFFFFF;
+        border-radius: 17px;
+        transition: all 0.3s ease-in 0s; 
+      }
+      .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+        margin-left: 0;
+      }
+      .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+        right: 0px; 
+      }
+
     </style>
   
     <app-header-layout>
@@ -54,6 +111,13 @@
         <a href="https://nexpaq.com/terms-of-use/">Terms of Use</a>
         <a href="https://nexpaq.com/partners/">Our Partners</a>
         <span>© Nexpaq Limited</span>
+        <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+            <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+          </label>
+        </div>
       </footer>
     </app-header-layout>
 
