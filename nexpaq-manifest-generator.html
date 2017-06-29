@@ -40,10 +40,18 @@
         padding-right: 20px;
       }
 
+      .language-switcher {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 20px;
+      }
+
       .onoffswitch {
         position: relative; 
-        width: 40px;
-        margin-left: 20px;
+        width: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 2px;
         -webkit-user-select: none;
         -moz-user-select:none;
         -ms-user-select: none;
@@ -64,7 +72,7 @@
       .onoffswitch-inner:before, .onoffswitch-inner:after {
         float: left;
         width: 50%;
-        height: 13px;
+        height: 10px;
         box-sizing: border-box;
       }
       .onoffswitch-inner:before {
@@ -80,12 +88,13 @@
       }
       .onoffswitch-switch {
         display: block;
-        width: 19px;
+        width: 15px;
+        height: 17px;
         margin: -3px;
         background: #EE3696;
         position: absolute;
         top: 0; bottom: 0;
-        right: 23px;
+        right: 16px;
         border: 2px solid #FFFFFF;
         border-radius: 17px;
         transition: all 0.3s ease-in 0s; 
@@ -111,12 +120,16 @@
         <a href="https://nexpaq.com/terms-of-use/">Terms of Use</a>
         <a href="https://nexpaq.com/partners/">Our Partners</a>
         <span>© Nexpaq Limited</span>
-        <div class="onoffswitch">
-          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-            <label class="onoffswitch-label" for="myonoffswitch">
-            <span class="onoffswitch-inner"></span>
-            <span class="onoffswitch-switch"></span>
-          </label>
+        <div class="language-switcher">
+          <span>EN</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+              <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+          <span>CHI</span>
         </div>
       </footer>
     </app-header-layout>
