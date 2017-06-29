@@ -17,18 +17,45 @@
         font-size: 18px;
       }
 
-      manifest-wrapper {
+      nexpaq-manifest-interface {
         max-width: 980px;
         margin: 0 auto;
       }
+
+      footer {
+        margin: 0 auto;
+        margin-top: 85px;
+        text-align: center;
+        padding: 20px;
+        color: #606060;
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid #606060;
+        max-width: 980px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #606060;
+        padding-right: 20px;
+      }
+
     </style>
-    
-    <app-header condenses>
-      <app-toolbar>
-        <div main-title>Nexpaq Manifest Generator</div>
-      </app-toolbar>
-    </app-header>
-    <nexpaq-manifest-interface></nexpaq-manifest-interface>
+  
+    <app-header-layout>
+      <app-header condenses>
+        <app-toolbar>
+          <div main-title>Nexpaq Manifest Generator</div>
+        </app-toolbar>
+      </app-header>
+      <nexpaq-manifest-interface></nexpaq-manifest-interface>
+      <footer>
+        <a href="https://nexpaq.com/privacy-policy/">Privacy Policy</a>
+        <a href="https://nexpaq.com/terms-of-use/">Terms of Use</a>
+        <a href="https://nexpaq.com/partners/">Our Partners</a>
+        <span>© Nexpaq Limited</span>
+      </footer>
+    </app-header-layout>
 
   </template>
   <script>

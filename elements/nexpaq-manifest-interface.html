@@ -19,12 +19,18 @@
         width: 100%;
       }
 
-      nexpaq-manifest-form,
-      nexpaq-manifest-view,
-      nexpaq-manifest-actions {
-        width: 47%;
+      nexpaq-manifest-form {
         min-width: 320px;
         flex-grow: 1;
+        width: 47%;
+      }
+
+      .column-container {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        width: 47%;
+        min-width: 320px;
       }
 
       nexpaq-manifest-type-selector {
@@ -32,19 +38,29 @@
       }
 
       nexpaq-manifest-view{
+        order: 1;
+        flex-grow: 0.1;
         margin-left: auto;
+        width: 100%;
+        /*height: 80%;*/
+        
       }
+
       nexpaq-manifest-actions {
+        flex-grow: 1;
+        order: 2;
         max-width: 400px;
-        margin-left: auto;
+        margin: auto;
+        width: 100%;
       }
 
     </style>
     <nexpaq-manifest-type-selector type="{{type}}"></nexpaq-manifest-type-selector>
     <nexpaq-manifest-form id="userForm" data="{{formData}}"  valid="{{valid}}" type="[[type]]" fields={{fields}}></nexpaq-manifest-form>
-    <nexpaq-manifest-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]"></nexpaq-manifest-view>
-    <nexpaq-manifest-actions data="{{formData}}" json="[[json]]" valid="[[valid]]" type="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></nexpaq-manifest-actions>
-   
+    <div class="column-container">
+      <nexpaq-manifest-view data="[[formData]]" json="{{json}}" render-tile="[[isEqual(type, 'tile')]]" max-lines="18"></nexpaq-manifest-view>
+      <nexpaq-manifest-actions data="{{formData}}" json="[[json]]" valid="[[valid]]" type="[[type]]" on-manifest-uploaded="manifestUploadedHandler"></nexpaq-manifest-actions>
+    </div>
   </template>
 
   <script>

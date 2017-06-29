@@ -3,6 +3,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="nexpaq-tile.html">
+<link rel="import" href="nexpaq-replaceable-icon.html">
 
 <dom-module id="nexpaq-manifest-view">
   <template>
@@ -29,6 +30,7 @@
         white-space: pre;
         overflow: scroll;
         background: white;
+        line-height: 18px;
       }
 
       .tile-container {
@@ -37,10 +39,7 @@
         width: 112px; height: 112px;
         border-radius: 3px;
         overflow: hidden;
-      }
-
-      .tile-container nexpaq-tile {
-        z-index: -1;
+        margin-top: 50px;
       }
 
     </style>
@@ -48,12 +47,14 @@
     <div>
         <h4> manifest.json </h4>
 
-        <div class="resultOutput">
+        <div class="resultOutput" style$="max-height: [[calculatePixelsInLines(maxLines)]]px;">
 [[renderData(data.*)]]
         </div>
 
         <div class="tile-container">
-          <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.textColor]]"></nexpaq-tile>
+          <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.textColor]]">
+            <nexpaq-replaceable-icon src="../img/icon.svg"></nexpaq-replaceable-icon>
+          </nexpaq-tile>
         </div>
     </div>
   </template>
@@ -77,7 +78,8 @@
           json: {
             type: String,
             notify: true
-          }
+          },
+          maxLines: Number
         }
       }
 
@@ -96,13 +98,10 @@
         return json;
       }
 
-      ready() {
-        super.ready();
+      calculatePixelsInLines (maxLines) {
+        return maxLines * 18;
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-      }
     }
 
     // Register custom element definition using standard platform API
