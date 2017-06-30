@@ -65,7 +65,7 @@
     <app-header-layout>
       <app-header condenses>
         <app-toolbar>
-          <div main-title>Nexpaq Manifest Generator</div>
+          <div main-title>Nexpaq {{localize('headerGenerator')}}</div>
         </app-toolbar>
       </app-header>
       <nexpaq-manifest-interface language="[[language]]" resources="[[resources]]"></nexpaq-manifest-interface>
@@ -89,7 +89,7 @@
 
       connectedCallback() {
         super.connectedCallback();
-        this.loadResources(this.resolveUrl('locales.json'));
+        this.loadResources(this.resolveUrl('localizedData.json'));
       }
 
       static get properties() {
