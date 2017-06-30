@@ -1,3 +1,5 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
 <dom-module id="nexpaq-replaceable-icon">
   <template>
     <style>
@@ -25,7 +27,7 @@
 
     </style>
     
-    <input type="file" class="file-field" id="fileField">
+    <input type="file" class="file-field" id="fileField" on-dragenter="dragEnterOverHandler" on-dragover="dragEnterOverHandler" on-drop="dropHandler">
     <img src$="[[src]]" id="iconImage">
 
   </template>
@@ -46,20 +48,43 @@
         this.$.fileField.addEventListener("change", e => {this.uploadHandler()});
       }
 
+      dragEnterOverHandler(event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+
+      dropHandler(event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        const dt = event.dataTransfer;
+        const files = dt.files;
+
+        const file = files[0];
+
+        if(file) {
+          this.processFile(file);
+        }
+      }
+
       uploadHandler(event) {
         var file = this.$.fileField.files[0];
 
         if (file) {
-          //Instantiates File Reader
-          var reader = new FileReader();
-
-          var self = this;
-          reader.addEventListener("load", function () {
-            self.src = reader.result;
-          }, false);
-
-          reader.readAsDataURL(file);
+          this.processFile(file);
         }
+      }
+
+      processFile(file) {
+        //Instantiates File Reader
+        var reader = new FileReader();
+
+        var self = this;
+        reader.addEventListener("load", function () {
+          self.src = reader.result;
+        }, false);
+
+        reader.readAsDataURL(file);
       }
     }
 
