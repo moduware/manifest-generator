@@ -57,13 +57,14 @@
       <div class="resultOutput" style$="max-height: [[calculatePixelsInLines(maxLines)]]px;">
 [[renderData(data.*)]]
       </div>
-
-      <div class="tile-container" id="tile-container">
-        <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.textColor]]">
-          <nexpaq-replaceable-icon src="img/icon.svg"></nexpaq-replaceable-icon>
-        </nexpaq-tile>
-      </div>
-      <span class="note"> <sup>*</sup>You can change the icon by clicking on it or droping the icon.</span> 
+      <template id="tile" is="dom-if" if="{{checkOption(type)}}" restamp="true" >
+        <div class="tile-container" id="tile-container">
+          <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.textColor]]">
+            <nexpaq-replaceable-icon src="img/icon.svg"></nexpaq-replaceable-icon>
+          </nexpaq-tile>
+        </div>
+        <span class="note"> <sup>*</sup>You can change the icon by clicking on it or droping the icon.</span> 
+      </template>
     </div>
   </template>
 
@@ -108,6 +109,11 @@
 
       calculatePixelsInLines (maxLines) {
         return maxLines * 18;
+      }
+      
+      checkOption(option) {
+        if(option == "tile") return 1;
+        else return 0;
       }
 
     }
