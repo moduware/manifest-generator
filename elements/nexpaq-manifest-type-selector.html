@@ -22,15 +22,15 @@
      
     </style>
     <paper-tabs id='options' selected="{{selected}}">
-      <paper-tab>TILE</paper-tab>
-      <paper-tab>MODULE</paper-tab>
+      <paper-tab>{{localize('tabTile')}}</paper-tab>
+      <paper-tab>{{localize('tabModule')}}</paper-tab>
     </paper-tabs>
   </template>
 
   <script>
 
     // Extend Polymer.Element base class
-    class UserOption extends Polymer.Element {
+    class UserOption extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
 
       static get is() { return 'nexpaq-manifest-type-selector' }
 
