@@ -42,20 +42,28 @@
         margin-top: 50px;
       }
 
+      .note {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 10px;
+        opacity: 0.8;
+        margin-left: 20%;
+      }
+
     </style>
 
     <div>
-        <h4> manifest.json </h4>
-
-        <div class="resultOutput" style$="max-height: [[calculatePixelsInLines(maxLines)]]px;">
+      <h4> manifest.json </h4>
+      <div class="resultOutput" style$="max-height: [[calculatePixelsInLines(maxLines)]]px;">
 [[renderData(data.*)]]
-        </div>
+      </div>
 
-        <div class="tile-container">
-          <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.textColor]]">
-            <nexpaq-replaceable-icon src="img/icon.svg"></nexpaq-replaceable-icon>
-          </nexpaq-tile>
-        </div>
+      <div class="tile-container" id="tile-container">
+        <nexpaq-tile title="[[data.title]]" color="[[data.color]]" text-color="[[data.textColor]]">
+          <nexpaq-replaceable-icon src="img/icon.svg"></nexpaq-replaceable-icon>
+        </nexpaq-tile>
+      </div>
+      <span class="note"> <sup>*</sup>You can change the icon by clicking on it or droping the icon.</span> 
     </div>
   </template>
 
