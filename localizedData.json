@@ -21,7 +21,13 @@
     "buttonDownload": "DOWNLOAD",
     "buttonUpload": "UPLOAD",
     "tabTile": "TILE",
-    "tabModule": "MODULE"
+    "tabModule": "MODULE",
+    "dialogButtonRequired": "GOT IT!",
+    "dialogButtonConfirm": "Yes",
+    "dialogButtonDismiss": "No",
+    "dialogUnfamiliarData": "We found unfamiliar field/fields on your uploaded manifest file. Would you like to keep them in your manifest and continue?",
+    "dialogRequiredField" : ""
+
   },
   "esp" : {
     "headerGenerator": "Generador de Manifiesto",
@@ -45,6 +51,11 @@
     "buttonDownload": "DESCARGAR",
     "buttonUpload": "SUBI",
     "tabTile": "AZULEJO",
-    "tabModule": "MÓDULO"
+    "tabModule": "MÓDULO",
+    "dialogButtonRequired": "GOT IT!",
+    "dialogButtonConfirm": "Si",
+    "dialogButtonDismiss": "No",
+    "dialogUnfamiliarData": "We found unfamiliar field/fields on your uploaded manifest file. Would you like to keep them in your manifest and continue?",
+    "dialogRequiredField" : ""
   }
 }

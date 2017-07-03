@@ -39,15 +39,14 @@
     <paper-dialog id="modal" modal>
       <p>I see that you haven't filled all the required fields yet.<br> Please make sure you filled <strong>{{requiredFields}}</strong> fields before downloading the manifest file!</p>
       <div class="buttons">
-        <paper-button dialog-confirm autofocus>GOT IT!</paper-button>
+        <paper-button dialog-confirm autofocus>{{localize('dialogButtonRequired')}}</paper-button>
       </div>
     </paper-dialog>
     <paper-dialog id="confirm" modal="true" on-iron-overlay-closed="dismissDialog">
-      <p> We found unfamiliar field/fields on your uploaded manifest file. Would you like to keep them in your manifest and continue?
-      </p>
+      <p> {{localize('dialogUnfamiliarData')}}</p>
       <div class="buttons">
-        <paper-button dialog-confirm>YES</paper-button>
-        <paper-button dialog-dismiss>NO</paper-button>
+        <paper-button dialog-confirm>{{localize('dialogButtonConfirm')}}</paper-button>
+        <paper-button dialog-dismiss>{{localize('dialogButtonDismiss')}}</paper-button>
       </div>
     </paper-dialog>
 
