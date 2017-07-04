@@ -37,7 +37,7 @@
     </paper-button>
 
     <paper-dialog id="modal" modal>
-      <p>I see that you haven't filled all the required fields yet.<br> Please make sure you filled <strong>{{requiredFields}}</strong> fields before downloading the manifest file!</p>
+      <p>{{localize('dialogRequiredField')}}<strong>{{requiredFields}}</strong> fields before downloading the manifest file!</p>
       <div class="buttons">
         <paper-button dialog-confirm autofocus>{{localize('dialogButtonRequired')}}</paper-button>
       </div>

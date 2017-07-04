@@ -26,8 +26,7 @@
     "dialogButtonConfirm": "Yes",
     "dialogButtonDismiss": "No",
     "dialogUnfamiliarData": "We found unfamiliar field/fields on your uploaded manifest file. Would you like to keep them in your manifest and continue?",
-    "dialogRequiredField" : ""
-
+    "dialogRequiredField" : "I see that you haven't filled all the required fields yet.<br> Please make sure you filled, "
   },
   "esp" : {
     "headerGenerator": "Generador de Manifiesto",
@@ -56,6 +55,6 @@
     "dialogButtonConfirm": "Si",
     "dialogButtonDismiss": "No",
     "dialogUnfamiliarData": "We found unfamiliar field/fields on your uploaded manifest file. Would you like to keep them in your manifest and continue?",
-    "dialogRequiredField" : ""
+    "dialogRequiredField" : "I see that you haven't filled all the required fields yet.<br> Please make sure you filled, "
   }
 }
