@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../bower_components/paper-swatch-picker/paper-swatch-picker.html">
 
 <dom-module id="nexpaq-manifest-form">
   <template>
@@ -28,6 +29,17 @@
         color: #606060;
         font-weight: 500;
         text-align: center;
+      }
+
+      .colorPicker paper-input {
+        width:90%;
+        float: left;
+      }
+
+      .colorPicker paper-swatch-picker {
+        float: right;
+        top: 15px;
+        width:10%;
       }
     </style>
 
@@ -72,12 +84,19 @@
       <paper-input always-float-label id="title" label="{{localize('labelTitle')}}" value="{{data.title}}" maxlength="20"></paper-input>
       <paper-tooltip for="title" offset="-7" position="bottom">ex : Laser</paper-tooltip>
 
-      <paper-input always-float-label id="color" label="{{localize('labelColor')}}" value="{{data.color}}" maxlength="20"></paper-input>
-      <paper-tooltip for="color" offset="-7" position="bottom">ex : #606060</paper-tooltip>
-     
-      <paper-input always-float-label id="textColor" label="{{localize('labelTextColor')}}" value="{{data.textColor}}" maxlength="20"></paper-input>
-      <paper-tooltip for="textColor" offset="-7" position="bottom">ex : white</paper-tooltip>
+      <div class="colorPicker">
+        <paper-input always-float-label id="color" label="{{localize('labelColor')}}" value="{{data.color}}" maxlength="20"></paper-input>
+        <paper-tooltip for="color" offset="-7" position="bottom">ex : #606060</paper-tooltip>
+        <paper-swatch-picker id="colorPicker" color="{{data.color}}"></paper-swatch-picker>
+        <paper-tooltip for="colorPicker" offset="-7" position="bottom">Click to pick a color from swatch</paper-tooltip>
+
+        <paper-input always-float-label id="textColor" label="{{localize('labelTextColor')}}" value="{{data.textColor}}" maxlength="20"></paper-input>
+        <paper-tooltip for="textColor" offset="-7" position="bottom">ex : white</paper-tooltip>
+        <paper-swatch-picker id="textColorPicker" color="{{data.textColor}}"></paper-swatch-picker>
+        <paper-tooltip for="textColorPicker" offset="-7" position="bottom">Click to pick a color from swatch</paper-tooltip>
+      </div>
     </template>
+    
     <template id="module" is="dom-if" if="{{!checkOption(type)}}" restamp="true">
       <paper-input always-float-label id="size" label="{{localize('labelSize')}}" value="{{data.size}}" allowed-pattern="[0-9]" required auto-validate error-message="This field is required!" maxlength="5" on-change="validateForm"></paper-input>
       <paper-tooltip for="size" offset="-7" position="bottom">ex : 1</paper-tooltip>
