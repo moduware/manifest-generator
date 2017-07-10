@@ -4,6 +4,6 @@ gulp.task('generate-service-worker', function(callback) {
   var swPrecache = require('sw-precache');
 
   swPrecache.write('service-worker.js', {
-    staticFileGlobs: ['\**']
+    staticFileGlobs: ['bower_components/**', 'elements/**', 'img/**', '*.{js,json,html}']
   }, callback);
 });
